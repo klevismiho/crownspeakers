@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "crownspeakers/quotes-slider",
+  "version": "1.0.0",
+  "title": "Quotes Slider",
+  "category": "crownspeakers",
+  "icon": "format-quote",
+  "description": "Slider of client quotes",
+  "example": {
+    "viewportWidth": 1200
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "textdomain": "crownspeakers",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

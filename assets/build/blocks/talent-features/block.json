@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "crownspeakers/talent-features",
+  "version": "1.0.0",
+  "title": "Talent Features",
+  "category": "crownspeakers",
+  "icon": "groups",
+  "description": "Numbered features beside a collage of speaker images",
+  "example": {
+    "viewportWidth": 1200
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "textdomain": "crownspeakers",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

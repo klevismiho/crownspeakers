@@ -1,0 +1,197 @@
+@use '../../assets/src/scss/mixins' as *;
+
+.wp-block-crownspeakers-global-form {
+	position: relative;
+	margin-left: -1rem;
+	margin-right: -1rem;
+	padding: 4rem 1rem;
+	background-color: var(--color-primary);
+	color: var(--color-white);
+	overflow: hidden;
+
+	// Optional photo behind the intro, fading into the background color.
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		height: 22rem;
+		background-image: var(--global-form-bg, none);
+		background-size: cover;
+		background-position: center;
+		opacity: 0.25;
+		mask-image: linear-gradient(to bottom, #000 40%, transparent);
+		pointer-events: none;
+	}
+
+	.section-inner {
+		position: relative;
+		max-width: var(--wp--style--global--content-size);
+		margin: 0 auto;
+	}
+
+	// Centered intro.
+	.global-form__intro {
+		margin-bottom: 4rem;
+		text-align: center;
+
+		p {
+			margin: 0;
+			font-size: 1.25rem;
+		}
+	}
+
+	.global-form__heading {
+		margin: 0 0 1.5rem;
+		font-size: 2.75rem;
+		line-height: 1.1;
+		color: var(--color-white);
+
+		@include breakpoint(small) {
+			font-size: 4rem;
+		}
+
+		span {
+			color: var(--color-secondary);
+		}
+	}
+
+	.global-form__columns {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3rem;
+
+		@include breakpoint(medium) {
+			grid-template-columns: 5fr 7fr;
+			gap: 6rem;
+			padding-left: 7rem;
+		}
+	}
+
+	// Left column.
+	.global-form__content {
+		align-self: center;
+		max-width: 23rem;
+
+		p {
+			margin: 0 0 1.5rem;
+			font-size: 0.9375rem;
+			line-height: 1.75;
+		}
+	}
+
+	.global-form__subheading {
+		margin: 0 0 2rem;
+		font-size: 2.5rem;
+		line-height: 1.05;
+		color: var(--color-white);
+	}
+
+	.global-form__phone {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.625rem 1.75rem;
+		border: 1px solid rgba(255, 255, 255, 0.6);
+		border-radius: 999px;
+		color: var(--color-white);
+		text-decoration: none;
+		transition: border-color 0.2s ease;
+
+		svg {
+			color: var(--color-secondary);
+		}
+
+		&:hover {
+			border-color: var(--color-white);
+		}
+	}
+
+	// Form.
+	.global-form__form-title {
+		margin: 0 0 2rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 1.25rem;
+		font-weight: 500;
+		color: var(--color-white);
+	}
+
+	.global-form__fields {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.25rem 1rem;
+
+		@include breakpoint(small) {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.global-form__field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+
+		&--full {
+			grid-column: 1 / -1;
+		}
+
+		label {
+			font-size: 0.75rem;
+			color: rgba(255, 255, 255, 0.85);
+		}
+
+		input,
+		textarea {
+			width: 100%;
+			box-sizing: border-box;
+			padding: 0.75rem 0.875rem;
+			border: 1px solid #d6dae1;
+			border-radius: 2px;
+			background-color: var(--color-white);
+			font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+			font-size: 0.875rem;
+			color: var(--color-dark-gray);
+
+			&::placeholder {
+				color: #5b6675;
+			}
+
+			&:focus {
+				outline: 2px solid var(--color-secondary);
+				outline-offset: 1px;
+			}
+		}
+
+		input {
+			min-height: 2.75rem;
+		}
+
+		textarea {
+			min-height: 5.5rem;
+			resize: vertical;
+		}
+	}
+
+	.global-form__actions {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 1.5rem;
+	}
+
+	.global-form__submit {
+		padding: 0.75rem 1.5rem;
+		border: 0;
+		border-radius: 999px;
+		background-color: var(--color-secondary);
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 0.9375rem;
+		color: var(--color-dark-gray);
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: var(--color-white);
+		}
+	}
+}

@@ -1,0 +1,146 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/explore-by-industry/style.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+.wp-block-crownspeakers-explore-by-industry {
+  padding: 4rem 0;
+}
+.wp-block-crownspeakers-explore-by-industry .section-inner {
+  max-width: var(--wp--style--global--content-size);
+  margin: 0 auto;
+}
+.wp-block-crownspeakers-explore-by-industry .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+.wp-block-crownspeakers-explore-by-industry .section-title {
+  margin: 0;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  color: var(--color-primary);
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__nav {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.75rem;
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__arrow:hover {
+  border-color: var(--color-primary);
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__arrow.swiper-button-disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__swiper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.wp-block-crownspeakers-explore-by-industry .swiper-wrapper {
+  display: flex;
+  box-sizing: content-box;
+}
+.wp-block-crownspeakers-explore-by-industry .swiper-slide {
+  flex-shrink: 0;
+  height: auto;
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-height: 16rem;
+  padding: 1.875rem 1.5rem 1.25rem;
+  box-sizing: border-box;
+  border: 1px solid #d6dae1;
+  border-radius: 0.75rem;
+  background-color: #e5e8ee;
+  color: var(--color-primary);
+  text-align: center;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__card:hover {
+  border-color: var(--color-primary);
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__card:hover .explore-by-industry__link {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.75rem;
+  height: 4.75rem;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__title {
+  margin: 1.25rem 0 1.5rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.wp-block-crownspeakers-explore-by-industry .explore-by-industry__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  margin-top: auto;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

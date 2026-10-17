@@ -10989,7 +10989,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const block = swiperElement.closest('.wp-block-crownspeakers-speakers-carousel');
     const autoplay = block?.dataset.autoplay === 'true';
     new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](swiperElement, {
-      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Autoplay],
+      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation],
       slidesPerView: 1,
       spaceBetween: 16,
       loop: false,
@@ -10999,6 +10999,10 @@ document.addEventListener('DOMContentLoaded', () => {
         delay: 3000,
         disableOnInteraction: false
       } : false,
+      navigation: {
+        prevEl: block?.querySelector('.speakers-carousel__arrow--prev'),
+        nextEl: block?.querySelector('.speakers-carousel__arrow--next')
+      },
       breakpoints: {
         480: {
           slidesPerView: 2,

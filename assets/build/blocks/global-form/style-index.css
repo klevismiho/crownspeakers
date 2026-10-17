@@ -1,0 +1,207 @@
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/global-form/style.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+.wp-block-crownspeakers-global-form {
+  position: relative;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 4rem 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  overflow: hidden;
+}
+.wp-block-crownspeakers-global-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 22rem;
+  background-image: var(--global-form-bg, none);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent);
+          mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  pointer-events: none;
+}
+.wp-block-crownspeakers-global-form .section-inner {
+  position: relative;
+  max-width: var(--wp--style--global--content-size);
+  margin: 0 auto;
+}
+.wp-block-crownspeakers-global-form .global-form__intro {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+.wp-block-crownspeakers-global-form .global-form__intro p {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.wp-block-crownspeakers-global-form .global-form__heading {
+  margin: 0 0 1.5rem;
+  font-size: 2.75rem;
+  line-height: 1.1;
+  color: var(--color-white);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-global-form .global-form__heading {
+    font-size: 4rem;
+  }
+}
+.wp-block-crownspeakers-global-form .global-form__heading span {
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-global-form .global-form__columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 1024px) {
+  .wp-block-crownspeakers-global-form .global-form__columns {
+    grid-template-columns: 5fr 7fr;
+    gap: 6rem;
+    padding-left: 7rem;
+  }
+}
+.wp-block-crownspeakers-global-form .global-form__content {
+  align-self: center;
+  max-width: 23rem;
+}
+.wp-block-crownspeakers-global-form .global-form__content p {
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+.wp-block-crownspeakers-global-form .global-form__subheading {
+  margin: 0 0 2rem;
+  font-size: 2.5rem;
+  line-height: 1.05;
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-global-form .global-form__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+.wp-block-crownspeakers-global-form .global-form__phone svg {
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-global-form .global-form__phone:hover {
+  border-color: var(--color-white);
+}
+.wp-block-crownspeakers-global-form .global-form__form-title {
+  margin: 0 0 2rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-global-form .global-form__fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem 1rem;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-global-form .global-form__fields {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.wp-block-crownspeakers-global-form .global-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.wp-block-crownspeakers-global-form .global-form__field--full {
+  grid-column: 1/-1;
+}
+.wp-block-crownspeakers-global-form .global-form__field label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.wp-block-crownspeakers-global-form .global-form__field input,
+.wp-block-crownspeakers-global-form .global-form__field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid #d6dae1;
+  border-radius: 2px;
+  background-color: var(--color-white);
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.875rem;
+  color: var(--color-dark-gray);
+}
+.wp-block-crownspeakers-global-form .global-form__field input::placeholder,
+.wp-block-crownspeakers-global-form .global-form__field textarea::placeholder {
+  color: #5b6675;
+}
+.wp-block-crownspeakers-global-form .global-form__field input:focus,
+.wp-block-crownspeakers-global-form .global-form__field textarea:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 1px;
+}
+.wp-block-crownspeakers-global-form .global-form__field input {
+  min-height: 2.75rem;
+}
+.wp-block-crownspeakers-global-form .global-form__field textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+.wp-block-crownspeakers-global-form .global-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+.wp-block-crownspeakers-global-form .global-form__submit {
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--color-secondary);
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.9375rem;
+  color: var(--color-dark-gray);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.wp-block-crownspeakers-global-form .global-form__submit:hover {
+  background-color: var(--color-white);
+}
+
+/*# sourceMappingURL=style-index.css.map*/

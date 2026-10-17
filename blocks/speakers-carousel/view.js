@@ -1,6 +1,6 @@
 
 import Swiper from 'swiper';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const autoplay = block?.dataset.autoplay === 'true';
 
 			new Swiper(swiperElement, {
-				modules: [Autoplay],
+				modules: [Autoplay, Navigation],
 				slidesPerView: 1,
 				spaceBetween: 16,
 				loop: false,
@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 							disableOnInteraction: false,
 						}
 					: false,
+
+				navigation: {
+					prevEl: block?.querySelector('.speakers-carousel__arrow--prev'),
+					nextEl: block?.querySelector('.speakers-carousel__arrow--next'),
+				},
 
 				breakpoints: {
 					480: {
