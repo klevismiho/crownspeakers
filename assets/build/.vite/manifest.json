@@ -1,0 +1,11 @@
+{
+  "assets/src/js/main.js": {
+    "file": "js/global.js",
+    "name": "global",
+    "src": "assets/src/js/main.js",
+    "isEntry": true,
+    "css": [
+      "css/global.css"
+    ]
+  }
+}

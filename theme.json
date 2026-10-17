@@ -1,0 +1,125 @@
+{
+  "version": 3,
+
+  "settings": {
+    "layout": {
+      "contentSize": "1280px",
+      "wideSize": "1400px"
+    },
+    "custom": {
+      "small-size": "960px"
+    },
+    "typography": {
+    "fontFamilies": [
+      {
+        "fontFamily": "\"Instrument Sans\", sans-serif",
+        "slug": "crownspeakers-body-font",
+        "name": "Instrument Sans",
+        "fontFace": [
+          {
+            "fontFamily": "Instrument Sans",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "fontDisplay": "swap",
+            "src": [
+              "file:./assets/src/fonts/InstrumentSans-Regular.ttf"
+            ]
+          },
+          {
+            "fontFamily": "Instrument Sans",
+            "fontWeight": "500",
+            "fontStyle": "normal",
+            "fontDisplay": "swap",
+            "src": [
+              "file:./assets/src/fonts/InstrumentSans-Medium.ttf"
+            ]
+          }
+        ]
+      },
+      {
+        "fontFamily": "\"Playfair Display\", serif",
+        "slug": "crownspeakers-heading-font",
+        "name": "Playfair Display",
+        "fontFace": [
+          {
+            "fontFamily": "Playfair Display",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "fontDisplay": "swap",
+            "src": [
+              "file:./assets/src/fonts/PlayfairDisplay-Regular.ttf"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+    "color": {
+      "palette": [
+        {
+          "slug": "white",
+          "color": "#FFFFFF",
+          "name": "White"
+        },
+        {
+          "slug": "black",
+          "color": "#000000",
+          "name": "Black"
+        },
+        {
+          "slug": "crownspeakers-primary",
+          "color": "#34485C",
+          "name": "Crownspeakers Primary"
+        },
+        {
+          "slug": "crownspeakers-secondary",
+          "color": "#DDB56F",
+          "name": "Crownspeakers Secondary"
+        },
+        {
+          "slug": "crownspeakers-dark-gray",
+          "color": "#142333",
+          "name": "Crownspeakers Dark Gray"
+        }
+      ]
+    }
+  },
+
+  "styles": {
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--crownspeakers-body-font)"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--crownspeakers-heading-font)",
+          "fontWeight": "400"
+        }
+      }
+    },
+    "blocks": {
+      "core/button": {
+        "color": {
+          "background": "var(--wp--preset--color--crownspeakers-primary)",
+          "text": "#FFFFFF"
+        },
+        "typography": {
+          "fontWeight": "700"
+        },
+        "elements": {
+          "link": {
+            "color": {
+              "text": "#FFFFFF"
+            },
+            ":hover": {
+              "color": {
+                "background": "var(--wp--preset--color--crownspeakers-secondary)",
+                "text": "#FFFFFF"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

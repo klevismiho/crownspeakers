@@ -1,0 +1,148 @@
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/hero/style.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+.wp-block-crownspeakers-hero {
+  padding: 4rem 2rem;
+  margin-right: -1rem;
+  margin-left: -1rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-hero {
+    padding: 6rem 4rem;
+  }
+}
+.wp-block-crownspeakers-hero h1 {
+  margin-bottom: 2rem;
+  font-size: 4.0625rem;
+}
+.wp-block-crownspeakers-hero h1 span {
+  color: var(--color-secondary);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-hero p {
+    max-width: 60%;
+    min-height: 72px;
+    margin: 0 auto;
+    font-size: 1.25rem;
+  }
+}
+.wp-block-crownspeakers-hero .hero-form {
+  display: flex;
+  width: 100%;
+  max-width: 980px;
+  margin: 2rem auto 0;
+  margin-top: 4rem;
+  background-color: var(--color-white);
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
+}
+.wp-block-crownspeakers-hero .hero-form .field-group {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  padding: 1rem 1.5rem;
+}
+.wp-block-crownspeakers-hero .hero-form .field-group + .field-group {
+  border-right: 1px solid #ddd;
+}
+.wp-block-crownspeakers-hero .hero-form .field-group input,
+.wp-block-crownspeakers-hero .hero-form .field-group select {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline-offset: 2px;
+  background: transparent;
+  font: inherit;
+}
+.wp-block-crownspeakers-hero .hero-form .field-group button {
+  width: 100%;
+  white-space: nowrap;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+.wp-block-crownspeakers-hero .hero-form .field-group.field-group--search {
+  gap: 0.75rem;
+}
+.wp-block-crownspeakers-hero .hero-form .field-group.field-group--search .search-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: #777;
+}
+.wp-block-crownspeakers-hero .hero-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 11px;
+  opacity: 0.6;
+  position: absolute;
+  z-index: 0;
+}
+.wp-block-crownspeakers-hero .hero-image.hero-image-1 {
+  top: 30px;
+}
+.wp-block-crownspeakers-hero .hero-image.hero-image-2 {
+  width: 180px;
+  height: 180px;
+  right: 20%;
+  top: 43%;
+}
+.wp-block-crownspeakers-hero .hero-image.hero-image-3 {
+  width: 180px;
+  height: 180px;
+  right: 0;
+  bottom: 50px;
+}
+.wp-block-crownspeakers-hero .hero-image.hero-image-4 {
+  width: 150px;
+  height: 150px;
+  left: 350px;
+  top: 30px;
+}
+.wp-block-crownspeakers-hero .hero-image.hero-image-5 {
+  top: 30px;
+  left: 0;
+}
+.wp-block-crownspeakers-hero .hero-image.hero-image-6 {
+  left: 12%;
+  bottom: 50px;
+}

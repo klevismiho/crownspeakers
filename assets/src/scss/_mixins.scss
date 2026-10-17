@@ -1,0 +1,90 @@
+@use 'sass:map';
+
+$breakpoints: (
+	small: 800px,
+	medium: 1024px,
+	large: 1320px,
+	xlarge: 1600px,
+);
+
+
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+@mixin breakpoint($name) {
+
+	@if map.has-key($breakpoints, $name) {
+
+		@media (min-width: map.get($breakpoints, $name)) {
+			@content;
+		}
+
+	} @else {
+
+		@error "Unknown breakpoint `#{$name}`. Available breakpoints: #{map.keys($breakpoints)}";
+
+	}
+
+}
+
+
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+@mixin breakpoint-down($name) {
+
+	@if map.has-key($breakpoints, $name) {
+
+		@media (max-width: #{map.get($breakpoints, $name) - 0.02px}) {
+			@content;
+		}
+
+	} @else {
+
+		@error "Unknown breakpoint `#{$name}`. Available breakpoints: #{map.keys($breakpoints)}";
+
+	}
+
+}
+
+
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+@mixin breakpoint-between($from, $to) {
+
+	@if map.has-key($breakpoints, $from) and map.has-key($breakpoints, $to) {
+
+		@media (min-width: map.get($breakpoints, $from)) and (max-width: #{map.get($breakpoints, $to) - 0.02px}) {
+			@content;
+		}
+
+	} @else {
+
+		@error "Unknown breakpoint.";
+
+	}
+
+}

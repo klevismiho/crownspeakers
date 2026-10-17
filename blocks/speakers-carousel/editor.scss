@@ -1,0 +1,19 @@
+.logo-grid__logos {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 2rem;
+}
+
+.logo-grid__item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100px;
+}
+
+.logo-grid__item img {
+	max-width: 100%;
+	height: auto;
+	max-height: 60px;
+	object-fit: contain;
+}

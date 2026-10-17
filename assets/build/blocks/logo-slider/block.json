@@ -1,0 +1,76 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "crownspeakers/logo-slider",
+  "version": "1.0.0",
+  "title": "Logo Slider",
+  "category": "crownspeakers",
+  "icon": "grid-view",
+  "description": "Logo slider",
+  "example": {
+    "viewportWidth": 1200,
+    "attributes": {
+      "heading": "Trusted By Industry Experts.",
+      "buttonText": "See the Difference",
+      "buttonUrl": "#",
+      "autoplay": false,
+      "logos": [
+        {
+          "id": 1,
+          "url": "https://placehold.co/240x100?text=LOGO+1",
+          "alt": "Company logo"
+        },
+        {
+          "id": 2,
+          "url": "https://placehold.co/240x100?text=LOGO+2",
+          "alt": "Company logo"
+        },
+        {
+          "id": 3,
+          "url": "https://placehold.co/240x100?text=LOGO+3",
+          "alt": "Company logo"
+        },
+        {
+          "id": 4,
+          "url": "https://placehold.co/240x100?text=LOGO+4",
+          "alt": "Company logo"
+        },
+        {
+          "id": 5,
+          "url": "https://placehold.co/240x100?text=LOGO+5",
+          "alt": "Company logo"
+        },
+        {
+          "id": 6,
+          "url": "https://placehold.co/240x100?text=LOGO+6",
+          "alt": "Company logo"
+        }
+      ]
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "logos": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "textdomain": "logo-grid",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

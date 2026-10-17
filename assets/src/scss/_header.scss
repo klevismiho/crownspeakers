@@ -1,0 +1,35 @@
+@use 'mixins' as *;
+
+.site-header {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding: 2rem 0;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+
+    .wp-block-crownspeakers-navigation {
+        order: 1;
+
+        @include breakpoint(small) {
+            order: 2;
+        }
+    }
+
+    .wp-block-site-logo {
+        order: 1;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        order: 3;
+
+        .wp-block-button {
+            .wp-element-button {
+                background-color: var(--color-secondary);
+                color: var(--color-dark-gray);
+            }
+        }
+    }
+}

@@ -1,0 +1,162 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/navigation/style.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+.wp-block-crownspeakers-navigation {
+  position: relative;
+}
+.wp-block-crownspeakers-navigation__toggle {
+  display: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+.wp-block-crownspeakers-navigation__toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 5px 0;
+  background: var(--color-black);
+}
+.wp-block-crownspeakers-navigation__menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.wp-block-crownspeakers-navigation__menu .menu-item {
+  position: relative;
+}
+.wp-block-crownspeakers-navigation__menu .menu-item > a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-white);
+  padding: 0.75rem 0;
+}
+.wp-block-crownspeakers-navigation__menu .menu-item > a:hover {
+  color: var(--color-primary);
+}
+.wp-block-crownspeakers-navigation__menu .menu-item-has-children > a {
+  display: inline-flex;
+  align-items: center;
+}
+.wp-block-crownspeakers-navigation__menu .menu-item-has-children .sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 9999;
+  min-width: 220px;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.wp-block-crownspeakers-navigation__menu .menu-item-has-children .sub-menu .menu-item {
+  width: 100%;
+}
+.wp-block-crownspeakers-navigation__menu .menu-item-has-children .sub-menu .menu-item a {
+  display: block;
+  padding: 0.75rem 1rem;
+}
+.wp-block-crownspeakers-navigation__menu .menu-item-has-children:hover > .sub-menu {
+  display: block;
+}
+.wp-block-crownspeakers-navigation__submenu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: currentColor;
+}
+.wp-block-crownspeakers-navigation__submenu-toggle svg {
+  transition: transform 0.2s ease;
+}
+@media (max-width: 799.98px) {
+  .wp-block-crownspeakers-navigation {
+    position: static;
+  }
+  .wp-block-crownspeakers-navigation__toggle {
+    display: block;
+  }
+  .wp-block-crownspeakers-navigation__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+  }
+  .wp-block-crownspeakers-navigation__menu.is-open {
+    display: flex;
+  }
+  .wp-block-crownspeakers-navigation__menu .menu-item {
+    width: 100%;
+  }
+  .wp-block-crownspeakers-navigation__menu .menu-item > a {
+    padding: 1rem 0;
+  }
+  .wp-block-crownspeakers-navigation__menu .menu-item-has-children {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .wp-block-crownspeakers-navigation__menu .menu-item-has-children > .wp-block-crownhero-navigation__submenu-toggle {
+    margin-right: auto;
+  }
+  .wp-block-crownspeakers-navigation__menu .menu-item-has-children > .sub-menu {
+    position: static;
+    flex-basis: 100%;
+    display: none;
+    padding-right: 1rem;
+    box-shadow: none;
+  }
+  .wp-block-crownspeakers-navigation__menu .menu-item-has-children.is-open > .sub-menu {
+    display: block;
+  }
+}

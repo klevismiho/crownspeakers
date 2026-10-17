@@ -1,0 +1,93 @@
+@use '../../assets/src/scss/mixins' as *;
+
+.wp-block-crownspeakers-logo-slider {
+	padding: 1.5rem 0;
+	margin-left: -1rem;
+	margin-right: -1rem;
+	background-color: #F5F9FC;
+
+	.section-inner {
+		display: flex;
+		max-width: var(--wp--style--global--content-size);
+		margin: 0 auto;
+	}
+
+	.section-title {
+		width: 25%;
+		margin-top: 0;
+		font-size: 1.25rem;
+		color: var(--color-primary);
+	}
+
+	/* Swiper container */
+	.logo-grid__swiper {
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+		margin: 1rem 0;
+		user-select: none;
+		-webkit-user-select: none;
+
+		/* Fade edges */
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 150px;
+			z-index: 2;
+			pointer-events: none;
+		}
+
+		&::before {
+			left: 0;
+			background: linear-gradient(to right,
+					#F5F9FC,
+					transparent);
+		}
+
+		&::after {
+			right: 0;
+			background: linear-gradient(to left,
+					#F5F9FC,
+					transparent);
+		}
+	}
+
+	/* Swiper minimal styles */
+	.swiper-wrapper {
+		display: flex;
+		align-items: center;
+		transition-property: transform;
+	}
+
+	.swiper-slide {
+		flex-shrink: 0;
+		cursor: grab;
+
+		&:active {
+			cursor: grabbing;
+		}
+	}
+
+	.logo-grid__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+
+		img {
+			display: block;
+			max-width: 100%;
+			width: auto;
+			height: auto;
+		}
+	}
+
+	.wp-element-button {
+		&:hover {
+			background-color: var(--color-secondary);
+		}
+	}
+}

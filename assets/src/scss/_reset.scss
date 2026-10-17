@@ -1,0 +1,22 @@
+// _reset.scss
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+img,
+svg {
+	max-width: 100%;
+	display: block;
+}
+
+button {
+	font: inherit;
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}

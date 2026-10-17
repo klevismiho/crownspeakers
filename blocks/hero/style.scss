@@ -1,0 +1,133 @@
+@use '../../assets/src/scss/mixins' as *;
+
+.wp-block-crownspeakers-hero {
+    padding: 4rem 2rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    @include breakpoint(small) {
+        padding: 6rem 4rem;
+    }
+
+    h1 {
+        margin-bottom: 2rem;
+        font-size: 4.0625rem;
+
+        span {
+            color: var(--color-secondary);
+        }
+    }
+
+    p {
+        @include breakpoint(small) {
+            max-width: 60%;
+            min-height: 72px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+        }
+    }
+
+    .hero-form {
+        display: flex;
+        width: 100%;
+        max-width: 980px;
+        margin: 2rem auto 0;
+        margin-top: 4rem;
+        background-color: var(--color-white);
+        border-radius: 16px;
+        overflow: hidden;
+        z-index: 1;
+        position: relative;
+
+        .field-group {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            min-width: 0;
+            padding: 1rem 1.5rem;
+
+            &+.field-group {
+                border-left: 1px solid #ddd;
+            }
+
+            input,
+            select {
+                width: 100%;
+                min-width: 0;
+                border: 0;
+                outline-offset: 2px;
+                background: transparent;
+                font: inherit;
+            }
+
+            button {
+                width: 100%;
+                white-space: nowrap;
+                background-color: var(--color-secondary);
+                color: var(--color-primary);
+            }
+
+            &.field-group--search {
+                gap: 0.75rem;
+
+                .search-icon {
+                    flex-shrink: 0;
+                    width: 20px;
+                    height: 20px;
+                    color: #777;
+                }
+            }
+        }
+    }
+
+    .hero-image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 11px;
+        opacity: 0.6;
+        position: absolute;
+        z-index: 0;
+
+        &.hero-image-1 {
+            top: 30px;
+        }
+
+        &.hero-image-2 {
+            width: 180px;
+            height: 180px;
+            left: 20%;
+            top: 43%;
+        }
+
+        &.hero-image-3 {
+            width: 180px;
+            height: 180px;
+            left: 0;
+            bottom: 50px;
+        }
+
+        &.hero-image-4 {
+            width: 150px;
+            height: 150px;
+            right: 350px;
+            top: 30px;
+        }
+
+        &.hero-image-5 {
+            top: 30px;
+            right: 0;
+        }
+
+        &.hero-image-6 {
+            right: 12%;
+            bottom: 50px;
+        }
+    }
+
+}

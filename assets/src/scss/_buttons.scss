@@ -1,0 +1,36 @@
+@use 'mixins' as *;
+
+.wp-element-button {
+    transition: .2s all;
+}
+
+.wp-block-buttons {
+    @include breakpoint-down(small) {
+        flex-direction: column;
+    }
+
+    &.is-layout-flex {
+        .wp-block-button {
+            @include breakpoint-down(small) {
+                width: 100% !important;
+            }
+
+            &.is-style-outline {
+                .wp-element-button {
+                    &:hover {
+                        background-color: var(--color-primary);
+                        border-color: var(--color-primary);
+                    }
+                }
+            }
+
+            .wp-element-button {
+                &:hover {
+                    background-color: var(--color-secondary);
+                    color: var(--color-white);
+                }
+            }
+        }
+    }
+
+}

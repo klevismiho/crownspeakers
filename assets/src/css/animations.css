@@ -1,0 +1,61 @@
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply to all Heru blocks except hero */
+.wp-block-heru-logo-grid,
+.wp-block-heru-split-card-with-highlights,
+.wp-block-heru-split-with-image,
+.wp-block-heru-split-card,
+.wp-block-heru-testimonials,
+.wp-block-heru-podcast,
+.wp-block-heru-cta {
+    opacity: 0;
+}
+
+.wp-block-heru-logo-grid.fade-in-up-visible,
+.wp-block-heru-split-card-with-highlights.fade-in-up-visible,
+.wp-block-heru-split-with-image.fade-in-up-visible,
+.wp-block-heru-split-card.fade-in-up-visible,
+.wp-block-heru-testimonials.fade-in-up-visible,
+.wp-block-heru-podcast.fade-in-up-visible,
+.wp-block-heru-cta.fade-in-up-visible {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Stagger effect for multiple elements (optional) */
+.wp-block-heru-logo-grid.fade-in-up-visible {
+    animation-delay: 0s;
+}
+
+.wp-block-heru-split-card-with-highlights.fade-in-up-visible {
+    animation-delay: 0.1s;
+}
+
+.wp-block-heru-split-with-image.fade-in-up-visible {
+    animation-delay: 0.1s;
+}
+
+.wp-block-heru-split-card.fade-in-up-visible {
+    animation-delay: 0.1s;
+}
+
+.wp-block-heru-testimonials.fade-in-up-visible {
+    animation-delay: 0.1s;
+}
+
+.wp-block-heru-podcast.fade-in-up-visible {
+    animation-delay: 0.1s;
+}
+
+.wp-block-heru-cta.fade-in-up-visible {
+    animation-delay: 0.1s;
+}
