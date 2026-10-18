@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "crownspeakers/header-favorites",
+  "version": "1.0.0",
+  "title": "Header Favorites",
+  "category": "crownspeakers",
+  "icon": "heart",
+  "description": "Favorites count and dropdown of saved speakers",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "crownspeakers",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

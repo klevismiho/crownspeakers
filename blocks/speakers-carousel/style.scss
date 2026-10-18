@@ -9,11 +9,20 @@
 		margin: 0 auto;
 	}
 
+	// Phones: title with the "View all" link below. From `small`: side by side.
 	.section-header {
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
 		align-items: flex-start;
-		gap: 2rem;
+		gap: 0.5rem;
+		margin-bottom: 1.5rem;
+
+		@include breakpoint(small) {
+			flex-direction: row;
+			justify-content: space-between;
+			gap: 2rem;
+			margin-bottom: 0;
+		}
 	}
 
 	.speakers-carousel__view-all {
@@ -30,10 +39,15 @@
 	}
 
 	.section-title {
-		width: 50%;
-		margin-top: 0;
-		font-size: 2.5rem;
+		margin: 0;
+		font-size: 2rem;
 		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			width: 50%;
+			margin-bottom: revert;
+			font-size: 2.5rem;
+		}
 	}
 
 	// Tabs and arrows row.
@@ -45,11 +59,23 @@
 		margin-bottom: 2rem;
 	}
 
-	// Category tabs.
+	// Category tabs: one swipeable row on phones, wrapping from `small`.
 	.speakers-carousel__tabs {
 		display: flex;
-		flex-wrap: wrap;
+		flex: 1;
 		gap: 0.5rem;
+		min-width: 0;
+		overflow-x: auto;
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		@include breakpoint(small) {
+			flex-wrap: wrap;
+			overflow-x: visible;
+		}
 	}
 
 	// Slider arrows.
@@ -92,6 +118,7 @@
 		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
 		font-size: 1rem;
 		color: #6b7280;
+		white-space: nowrap;
 		cursor: pointer;
 
 		&:hover,
@@ -144,6 +171,63 @@
 			object-fit: cover;
 			border-radius: 1rem;
 		}
+	}
+
+	// Favorite button over the photo: a round + that expands into a labelled pill
+	// on hover/focus. Toggling is handled by the header-favorites block's script.
+	.speakers-carousel__favorite {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.75rem;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		gap: 0;
+		height: 1.875rem;
+		padding: 0 0.5625rem;
+		border: 0;
+		border-radius: 999px;
+		background-color: var(--color-white);
+		box-shadow: 0 0.125rem 0.5rem rgba(20, 35, 51, 0.15);
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 0.75rem;
+		color: var(--color-dark-gray);
+		cursor: pointer;
+		transition: gap 0.2s ease, padding 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+
+		svg {
+			flex-shrink: 0;
+		}
+
+		&:hover,
+		&:focus-visible {
+			gap: 0.5rem;
+			padding-inline: 0.75rem;
+
+			.speakers-carousel__favorite-label {
+				max-width: 10rem;
+				opacity: 1;
+			}
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--color-secondary);
+			outline-offset: 2px;
+		}
+
+		&[aria-pressed="true"] {
+			background-color: var(--color-primary);
+			color: var(--color-white);
+		}
+	}
+
+	// Hidden visually until hover/focus, but always read by screen readers.
+	.speakers-carousel__favorite-label {
+		max-width: 0;
+		overflow: hidden;
+		white-space: nowrap;
+		opacity: 0;
+		transition: max-width 0.2s ease, opacity 0.2s ease;
 	}
 
 	// Speaker name.

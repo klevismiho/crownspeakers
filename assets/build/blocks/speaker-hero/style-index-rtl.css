@@ -1,0 +1,168 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/speaker-hero/style.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+.wp-block-crownspeakers-speaker-hero {
+  margin-right: -1rem;
+  margin-left: -1rem;
+  padding: 2rem 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-speaker-hero .section-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  max-width: var(--wp--style--global--content-size);
+  margin: 0 auto;
+}
+@media (min-width: 1024px) {
+  .wp-block-crownspeakers-speaker-hero .section-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__eyebrow {
+  margin: 0 0 0.25rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__name {
+  margin: 0 0 1.5rem;
+  font-size: 3rem;
+  line-height: 1.1;
+  color: var(--color-white);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-speaker-hero .speaker-hero__name {
+    font-size: 4rem;
+  }
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__name span {
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__tagline {
+  max-width: 22rem;
+  margin: 0 0 1.75rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__button--primary {
+  background-color: var(--color-secondary);
+  color: var(--color-dark-gray);
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__button--primary:hover {
+  background-color: var(--color-white);
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__button--outline {
+  padding-inline: 1.25rem;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__button--outline svg {
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__button--outline:hover {
+  border-color: var(--color-white);
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__media {
+  position: relative;
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 628/432;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__image--empty {
+  background-color: var(--color-dark-gray);
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.625rem 0.375rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  font-size: 0.75rem;
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__favorite {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--color-white);
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.75rem;
+  color: var(--color-dark-gray);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.wp-block-crownspeakers-speaker-hero .speaker-hero__favorite:hover {
+  background-color: var(--color-secondary);
+}
+html:has(.wp-block-crownspeakers-speaker-hero) {
+  scroll-behavior: smooth;
+}

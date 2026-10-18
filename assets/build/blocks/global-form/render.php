@@ -5,11 +5,14 @@ $background_url  = file_exists( get_template_directory() . $background_path )
 	? get_template_directory_uri() . $background_path
 	: '';
 
-$wrapper_attributes = get_block_wrapper_attributes(
-	$background_url
-		? array( 'style' => '--global-form-bg: url(' . esc_url( $background_url ) . ');' )
-		: array()
-);
+// The `inquiry` id lets other blocks link to the form (e.g. "Request more info").
+$extra_attributes = array( 'id' => 'inquiry' );
+
+if ( $background_url ) {
+	$extra_attributes['style'] = '--global-form-bg: url(' . esc_url( $background_url ) . ');';
+}
+
+$wrapper_attributes = get_block_wrapper_attributes( $extra_attributes );
 ?>
 
 <section <?php echo $wrapper_attributes; ?>>

@@ -1,22 +1,37 @@
 @use '../../assets/src/scss/mixins' as *;
 
 .wp-block-crownspeakers-hero {
-    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
     margin-left: -1rem;
     margin-right: -1rem;
+    padding: 3rem 1rem;
     background-color: var(--color-primary);
     color: var(--color-white);
     text-align: center;
-    position: relative;
-    overflow: hidden;
 
     @include breakpoint(small) {
+        padding: 5rem 3rem;
+    }
+
+    @include breakpoint(medium) {
         padding: 6rem 4rem;
     }
 
     h1 {
-        margin-bottom: 2rem;
-        font-size: 4.0625rem;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1.5rem;
+        font-size: 2.5rem;
+
+        @include breakpoint(small) {
+            margin-bottom: 2rem;
+            font-size: 3.25rem;
+        }
+
+        @include breakpoint(medium) {
+            font-size: 4.0625rem;
+        }
 
         span {
             color: var(--color-secondary);
@@ -24,35 +39,54 @@
     }
 
     p {
+        position: relative;
+        z-index: 1;
+        margin: 0 auto;
+        font-size: 1.125rem;
+
         @include breakpoint(small) {
             max-width: 60%;
             min-height: 72px;
-            margin: 0 auto;
             font-size: 1.25rem;
         }
     }
 
+    // Phones: fields stacked. From `medium`: one row with dividers.
     .hero-form {
+        position: relative;
+        z-index: 1;
         display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: 980px;
-        margin: 2rem auto 0;
-        margin-top: 4rem;
-        background-color: var(--color-white);
-        border-radius: 16px;
+        margin: 2.5rem auto 0;
         overflow: hidden;
-        z-index: 1;
-        position: relative;
+        border-radius: 16px;
+        background-color: var(--color-white);
+
+        @include breakpoint(medium) {
+            flex-direction: row;
+            margin-top: 4rem;
+        }
 
         .field-group {
             display: flex;
-            align-items: center;
             flex: 1;
+            align-items: center;
             min-width: 0;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.25rem;
 
-            &+.field-group {
-                border-left: 1px solid #ddd;
+            & + .field-group {
+                border-top: 1px solid #ddd;
+
+                @include breakpoint(medium) {
+                    border-top: 0;
+                    border-left: 1px solid #ddd;
+                }
+            }
+
+            @include breakpoint(medium) {
+                padding: 1rem 1.5rem;
             }
 
             input,
@@ -85,14 +119,20 @@
         }
     }
 
+    // Decorative photos: only where there's room around the content.
     .hero-image {
+        display: none;
+        position: absolute;
+        z-index: 0;
         width: 200px;
         height: 200px;
         object-fit: cover;
         border-radius: 11px;
         opacity: 0.6;
-        position: absolute;
-        z-index: 0;
+
+        @include breakpoint(large) {
+            display: block;
+        }
 
         &.hero-image-1 {
             top: 30px;
@@ -129,5 +169,4 @@
             bottom: 50px;
         }
     }
-
 }

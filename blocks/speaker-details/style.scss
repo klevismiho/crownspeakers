@@ -1,0 +1,186 @@
+@use '../../assets/src/scss/mixins' as *;
+
+.wp-block-crownspeakers-speaker-details {
+	margin-left: -1rem;
+	margin-right: -1rem;
+
+	.section-inner {
+		max-width: var(--wp--style--global--content-size);
+		margin: 0 auto;
+		padding-inline: 1rem;
+	}
+
+	// Narrow centered column for the about and bio rows.
+	.speaker-details__inner {
+		max-width: 54rem;
+		margin: 0 auto;
+		padding-inline: 1rem;
+	}
+
+	// Facts strip: Topics | Travels from | Speaking fee.
+	.speaker-details__facts {
+		border-bottom: 1px solid #e5e7eb;
+
+		.section-inner {
+			margin-block: 0;
+			display: grid;
+			grid-template-columns: 1fr;
+
+			@include breakpoint(small) {
+				grid-template-columns: 2fr 1fr 1fr;
+			}
+		}
+	}
+
+	.speaker-details__fact {
+		padding: 1.25rem 0;
+
+		& + .speaker-details__fact {
+			border-top: 1px solid #e5e7eb;
+
+			@include breakpoint(small) {
+				padding-left: 1.5rem;
+				border-top: 0;
+				border-left: 1px solid #e5e7eb;
+			}
+		}
+
+		dt {
+			margin-bottom: 0.25rem;
+			font-size: 0.75rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: #5b6675;
+		}
+
+		dd {
+			margin: 0;
+			font-size: 1.125rem;
+			color: var(--color-dark-gray);
+		}
+	}
+
+	// About row.
+	.speaker-details__about {
+		padding: 2.75rem 0 2.5rem;
+		border-bottom: 1px solid #e5e7eb;
+	}
+
+	.speaker-details__heading {
+		margin: 0 0 1.5rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 1rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: var(--color-dark-gray);
+	}
+
+	.speaker-details__summary {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+
+		@include breakpoint(small) {
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+
+	.speaker-details__image {
+		flex-shrink: 0;
+		width: 12.25rem;
+		height: auto;
+		aspect-ratio: 196 / 180;
+		object-fit: cover;
+		border-radius: 0.75rem;
+	}
+
+	.speaker-details__highlights {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			position: relative;
+			padding-left: 1.5rem;
+			font-size: 1.125rem;
+			line-height: 1.25;
+
+			color: #5b6675;
+
+			@include breakpoint(small) {
+				font-size: 1.25rem;
+			}
+
+			// Gold arrow bullet.
+			&::before {
+				content: '→';
+				position: absolute;
+				top: 0;
+				left: 0;
+				color: var(--color-secondary);
+			}
+		}
+	}
+
+	// Bio.
+	.speaker-details__bio-wrapper {
+		padding: 2rem 0 4rem;
+	}
+
+	.speaker-details__bio {
+		position: relative;
+		font-size: 1rem;
+		line-height: 1.5;
+		color: #5b6675;
+
+		> * {
+			margin: 0 0 1.5rem;
+		}
+
+		> :first-child {
+			font-size: 1.375rem;
+			line-height: 1.1;
+		}
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+
+		// Collapsed: show the first part with a fade at the bottom.
+		&.is-collapsed {
+			max-height: 20rem;
+			overflow: hidden;
+
+			&::after {
+				content: '';
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 4rem;
+				background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+			}
+		}
+	}
+
+	.speaker-details__more {
+		margin-top: 1.5rem;
+		padding: 0;
+		border: 0;
+		background: none;
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 1rem;
+		color: var(--color-dark-gray);
+		text-decoration: underline;
+		text-underline-offset: 0.25em;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}

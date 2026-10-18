@@ -1,0 +1,120 @@
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/speaker-books/style.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+.wp-block-crownspeakers-speaker-books {
+  padding: 4rem 0;
+}
+.wp-block-crownspeakers-speaker-books .section-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: var(--wp--style--global--content-size);
+  margin: 0 auto;
+}
+@media (min-width: 1024px) {
+  .wp-block-crownspeakers-speaker-books .section-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+  }
+}
+.wp-block-crownspeakers-speaker-books .speaker-books__eyebrow {
+  margin: 0 0 1.75rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-dark-gray);
+}
+.wp-block-crownspeakers-speaker-books .section-title {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--color-primary);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-speaker-books .section-title {
+    font-size: 2.5rem;
+  }
+}
+.wp-block-crownspeakers-speaker-books .speaker-books__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem 1.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 480px) {
+  .wp-block-crownspeakers-speaker-books .speaker-books__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.wp-block-crownspeakers-speaker-books .speaker-books__link {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: var(--color-dark-gray);
+  text-decoration: none;
+}
+.wp-block-crownspeakers-speaker-books .speaker-books__link:hover .speaker-books__cover img {
+  transform: scale(1.03);
+}
+.wp-block-crownspeakers-speaker-books .speaker-books__link:hover .speaker-books__title {
+  color: var(--color-primary);
+}
+.wp-block-crownspeakers-speaker-books .speaker-books__cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 428/354;
+  padding: 15% 0;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  background-color: #e5e8ee;
+}
+.wp-block-crownspeakers-speaker-books .speaker-books__cover img {
+  display: block;
+  width: auto;
+  height: 100%;
+  box-shadow: 0 0.25rem 0.75rem rgba(20, 35, 51, 0.15);
+  transition: transform 0.2s ease;
+}
+.wp-block-crownspeakers-speaker-books .speaker-books__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 1.375rem;
+  transition: color 0.2s ease;
+}

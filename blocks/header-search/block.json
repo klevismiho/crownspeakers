@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/header-search",
+	"version": "1.0.0",
+	"title": "Header Search",
+	"category": "crownspeakers",
+	"icon": "search",
+	"description": "Search icon that opens a speaker search panel under the header",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

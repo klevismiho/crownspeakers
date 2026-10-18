@@ -53,18 +53,24 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		gap: 3rem;
+		gap: 2rem;
 
 		@include breakpoint(small) {
+			gap: 3rem;
 			padding-block: 2.5rem 2.25rem;
 		}
 	}
 
 	.section-title {
 		margin: 0;
-		font-size: 3.25rem;
+		font-size: 2.25rem;
+
 		line-height: 1.05;
 		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			font-size: 3.25rem;
+		}
 	}
 
 	.split-with-image__body {
@@ -76,6 +82,5 @@
 			line-height: 1.3;
 			color: #5b6675;
 		}
-
 	}
 }

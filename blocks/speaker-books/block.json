@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/speaker-books",
+	"version": "1.0.0",
+	"title": "Speaker Books",
+	"category": "crownspeakers",
+	"icon": "book",
+	"description": "Books written by the speaker",
+	"example": {
+		"viewportWidth": 1200
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"usesContext": ["postId", "postType"],
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/speaker-search",
+	"version": "1.0.0",
+	"title": "Speaker Search",
+	"category": "crownspeakers",
+	"icon": "search",
+	"description": "Speakers page heading with search bar",
+	"example": {
+		"viewportWidth": 1200
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

@@ -8,15 +8,25 @@
 
 	.section-inner {
 		display: flex;
+		flex-direction: column;
 		max-width: var(--wp--style--global--content-size);
 		margin: 0 auto;
+
+		@include breakpoint(small) {
+			flex-direction: row;
+		}
 	}
 
 	.section-title {
-		width: 25%;
 		margin-top: 0;
+
 		font-size: 1.25rem;
 		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			flex-shrink: 0;
+			width: 25%;
+		}
 	}
 
 	/* Swiper container */
@@ -35,9 +45,13 @@
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			width: 150px;
+			width: 3rem;
 			z-index: 2;
 			pointer-events: none;
+
+			@include breakpoint(small) {
+				width: 150px;
+			}
 		}
 
 		&::before {

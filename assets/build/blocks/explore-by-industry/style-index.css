@@ -43,14 +43,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-explore-by-industry .section-header {
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
 }
 .wp-block-crownspeakers-explore-by-industry .section-title {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2rem;
   line-height: 1.1;
   color: var(--color-primary);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-explore-by-industry .section-title {
+    font-size: 2.5rem;
+  }
 }
 .wp-block-crownspeakers-explore-by-industry .explore-by-industry__nav {
   display: flex;
@@ -61,8 +72,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
   padding: 0;
   border: 1px solid #e5e7eb;
   border-radius: 50%;
@@ -70,6 +81,12 @@
   color: var(--color-primary);
   cursor: pointer;
   transition: border-color 0.2s ease;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-explore-by-industry .explore-by-industry__arrow {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
 }
 .wp-block-crownspeakers-explore-by-industry .explore-by-industry__arrow:hover {
   border-color: var(--color-primary);

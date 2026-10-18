@@ -5,8 +5,10 @@
 }
 
 .wp-block-buttons {
-    @include breakpoint-down(small) {
-        flex-direction: column;
+    flex-direction: column;
+
+    @include breakpoint(small) {
+        flex-direction: row;
     }
 
     &.is-layout-flex {

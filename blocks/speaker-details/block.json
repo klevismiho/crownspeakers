@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/speaker-details",
+	"version": "1.0.0",
+	"title": "Speaker Details",
+	"category": "crownspeakers",
+	"icon": "id-alt",
+	"description": "Speaker topics, fee, highlights and bio",
+	"example": {
+		"viewportWidth": 1200
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"usesContext": ["postId", "postType"],
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

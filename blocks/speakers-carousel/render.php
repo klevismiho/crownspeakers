@@ -12,6 +12,7 @@ $speakers = new WP_Query(
 		'posts_per_page' => -1,
 		'orderby'        => 'menu_order',
 		'order'          => 'ASC',
+		'meta_query'     => \CS\Theme\Speaker_Data::visible_meta_query(),
 	)
 );
 
@@ -28,7 +29,7 @@ $wrapper_attributes = get_block_wrapper_attributes();
 				<?php echo esc_html($heading); ?>
 			</h2>
 
-			<a class="speakers-carousel__view-all" href="/speakers/">View all speakers</a>
+			<a class="speakers-carousel__view-all" href="/all-speakers/">View all speakers</a>
 		</div>
 
 		<div class="speakers-carousel__toolbar">
@@ -121,6 +122,21 @@ $wrapper_attributes = get_block_wrapper_attributes();
 								<?php endif; ?>
 
 							</a>
+
+							<button
+								type="button"
+								class="speakers-carousel__favorite"
+								aria-pressed="false"
+								data-favorite
+								data-speaker-id="<?php echo esc_attr($speaker_id); ?>"
+								data-speaker-name="<?php echo esc_attr(get_the_title($speaker_id)); ?>"
+								data-speaker-url="<?php echo esc_url(get_permalink($speaker_id)); ?>"
+								data-speaker-image="<?php echo esc_url((string) get_the_post_thumbnail_url($speaker_id, 'thumbnail')); ?>">
+								<span class="speakers-carousel__favorite-label" data-favorite-label>Add to Favorites</span>
+								<svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+									<path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+								</svg>
+							</button>
 
 						</div>
 

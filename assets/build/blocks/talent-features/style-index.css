@@ -50,10 +50,16 @@
   }
 }
 .wp-block-crownspeakers-talent-features .section-title {
-  margin: 0 0 3.5rem;
-  font-size: 2.5rem;
+  margin: 0 0 2.5rem;
+  font-size: 2rem;
   line-height: 1.1;
   color: var(--color-primary);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-talent-features .section-title {
+    margin-bottom: 3.5rem;
+    font-size: 2.5rem;
+  }
 }
 .wp-block-crownspeakers-talent-features .talent-features__list {
   margin: 0;

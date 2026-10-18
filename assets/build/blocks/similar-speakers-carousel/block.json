@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "crownspeakers/similar-speakers-carousel",
+  "version": "1.0.0",
+  "title": "Similar Speakers Carousel",
+  "category": "crownspeakers",
+  "icon": "groups",
+  "description": "Carousel of speakers in the same category as the current speaker",
+  "example": {
+    "viewportWidth": 1200
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "usesContext": [
+    "postId",
+    "postType"
+  ],
+  "textdomain": "crownspeakers",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

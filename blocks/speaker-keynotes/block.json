@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/speaker-keynotes",
+	"version": "1.0.0",
+	"title": "Speaker Keynotes",
+	"category": "crownspeakers",
+	"icon": "microphone",
+	"description": "Accordion of the speaker's keynote topics",
+	"example": {
+		"viewportWidth": 1200
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"usesContext": ["postId", "postType"],
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

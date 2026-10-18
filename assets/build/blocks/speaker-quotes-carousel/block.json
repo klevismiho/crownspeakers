@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "crownspeakers/speaker-quotes-carousel",
+  "version": "1.0.0",
+  "title": "Speaker Quotes Carousel",
+  "category": "crownspeakers",
+  "icon": "format-quote",
+  "description": "Carousel of testimonials about a speaker",
+  "example": {
+    "viewportWidth": 1200
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "usesContext": [
+    "postId",
+    "postType"
+  ],
+  "textdomain": "crownspeakers",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

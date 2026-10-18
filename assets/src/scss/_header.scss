@@ -1,35 +1,81 @@
 @use 'mixins' as *;
 
+// Mobile: logo | search, favorites badge | hamburger.
+// From `small`: Contact Us and the "Favorites" label appear.
+// From `medium`: logo | inline menu | search, favorites, Contact Us.
 .site-header {
+    // Anchor for the mobile menu, megamenu, search and favorites panels.
+    position: relative;
+    z-index: 50;
     margin-left: -1rem;
     margin-right: -1rem;
-    padding: 2rem 0;
+    padding: 1rem;
     background-color: var(--color-primary);
     color: var(--color-white);
 
-    .wp-block-crownspeakers-navigation {
-        order: 1;
+    @include breakpoint(medium) {
+        padding-block: 2rem;
+    }
 
-        @include breakpoint(small) {
-            order: 2;
+    // The row inside the header.
+    > .wp-block-group {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+
+        @include breakpoint(medium) {
+            gap: 2rem;
         }
     }
 
     .wp-block-site-logo {
+        flex-shrink: 0;
         order: 1;
     }
 
     .header-actions {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        order: 3;
+        gap: 0.25rem;
+        order: 2;
+        margin-left: auto;
+
+        @include breakpoint(small) {
+            gap: 1rem;
+        }
+
+        @include breakpoint(medium) {
+            order: 3;
+            margin-left: 0;
+        }
+
+        // Contact Us: hidden on phones (it's in reach via the page content and footer).
+        .wp-block-buttons {
+            display: none;
+
+            @include breakpoint(small) {
+                display: flex;
+            }
+        }
 
         .wp-block-button {
             .wp-element-button {
                 background-color: var(--color-secondary);
                 color: var(--color-dark-gray);
+                white-space: nowrap;
             }
+        }
+    }
+
+    // While the mobile menu is open the header shows only the logo and the close button.
+    &.is-menu-open .header-actions {
+        visibility: hidden;
+    }
+
+    .wp-block-crownspeakers-navigation {
+        order: 3;
+
+        @include breakpoint(medium) {
+            order: 2;
         }
     }
 }

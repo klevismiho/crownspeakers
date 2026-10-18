@@ -12,15 +12,25 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		gap: 2rem;
-		margin-bottom: 3rem;
+		gap: 1rem;
+		margin-bottom: 2rem;
+
+		@include breakpoint(small) {
+			gap: 2rem;
+			margin-bottom: 3rem;
+		}
 	}
 
 	.section-title {
 		margin: 0;
-		font-size: 2.5rem;
+		font-size: 2rem;
+
 		line-height: 1.1;
 		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			font-size: 2.5rem;
+		}
 	}
 
 	// Slider arrows.
@@ -34,15 +44,21 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 3.25rem;
-		height: 3.25rem;
+		width: 2.75rem;
+		height: 2.75rem;
 		padding: 0;
+
 		border: 1px solid #e5e7eb;
 		border-radius: 50%;
 		background: #fff;
 		color: var(--color-primary);
 		cursor: pointer;
 		transition: border-color 0.2s ease;
+
+		@include breakpoint(small) {
+			width: 3.25rem;
+			height: 3.25rem;
+		}
 
 		&:hover {
 			border-color: var(--color-primary);
