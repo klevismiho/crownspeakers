@@ -20,7 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			const autoplay = block?.dataset.autoplay === 'true';
 
-			new Swiper(swiperElement, {
+			// Every slide, with the tabs it belongs to (`data-tabs`), kept so tabs can swap them in and out.
+			const allSlides = Array.from(swiperElement.querySelectorAll('.speakers-carousel__item'));
+			const tabs = block ? Array.from(block.querySelectorAll('.speakers-carousel__tab')) : [];
+			const slidesFor = (tab) =>
+				allSlides.filter((slide) => (slide.dataset.tabs || '').split(' ').includes(tab));
+
+			// Start with only the active tab's speakers.
+			const activeTab = swiperElement.dataset.activeTab;
+
+			if (activeTab) {
+				const activeSlides = slidesFor(activeTab);
+
+				allSlides
+					.filter((slide) => !activeSlides.includes(slide))
+					.forEach((slide) => slide.remove());
+			}
+
+			const swiper = new Swiper(swiperElement, {
 				modules: [Autoplay, Navigation],
 				slidesPerView: 1,
 				spaceBetween: 16,
@@ -54,6 +71,27 @@ document.addEventListener('DOMContentLoaded', () => {
 						spaceBetween: 32,
 					},
 				},
+			});
+
+			tabs.forEach((tabButton) => {
+				tabButton.addEventListener('click', () => {
+					const tab = tabButton.dataset.tab;
+
+					tabs.forEach((button) => {
+						const isActive = button === tabButton;
+
+						button.classList.toggle('is-active', isActive);
+						button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+					});
+
+					// Swap the slides in the DOM (Swiper's appendSlide needs its Manipulation module), then re-measure.
+					swiper.wrapperEl.replaceChildren(...slidesFor(tab));
+					swiper.update();
+					swiper.slideTo(0, 0);
+
+					// Re-sync favorite buttons on the slides that were just put back.
+					document.dispatchEvent(new CustomEvent('cs:favorites-refresh'));
+				});
 			});
 		});
 });

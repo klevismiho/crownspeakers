@@ -35,6 +35,7 @@ $block_registry = new Block_Registry(
 $block_registry->register();
 
 new Block_Category();
+new Rest_Api();
 new Post_Type_Testimonial();
 
 new Performance();

@@ -32,6 +32,8 @@ __webpack_require__.r(__webpack_exports__);
  * </button>
  *
  * This script loads on every page because the header-favorites block is in the header.
+ * It keeps every `[data-favorites-count]` element up to date (header link, mobile menu row)
+ * and handles `data-remove-id` buttons (Favorites page block).
  */
 
 const STORAGE_KEY = 'cs_favorites';
@@ -52,16 +54,6 @@ const writeFavorites = favorites => {
 };
 let favorites = readFavorites();
 const isFavorite = id => favorites.some(speaker => speaker.id === id);
-
-// Only allow same-site links and http(s) images from saved data.
-const safeUrl = value => {
-  try {
-    const url = new URL(value, window.location.origin);
-    return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
-  } catch (error) {
-    return '';
-  }
-};
 const updateButtons = () => {
   document.querySelectorAll('[data-favorite]').forEach(button => {
     const pressed = isFavorite(button.dataset.speakerId);
@@ -75,49 +67,20 @@ const updateButtons = () => {
     }
   });
 };
-const renderList = block => {
-  const list = block.querySelector('.header-favorites__list');
-  const empty = block.querySelector('.header-favorites__empty');
-  const count = block.querySelector('.header-favorites__count-number');
-  count.textContent = String(favorites.length);
-  empty.hidden = favorites.length > 0;
-  list.replaceChildren();
-  favorites.forEach(speaker => {
-    const item = document.createElement('li');
-    item.className = 'header-favorites__item';
-    const link = document.createElement('a');
-    link.className = 'header-favorites__link';
-    link.href = safeUrl(speaker.url) || '#';
-    const image = safeUrl(speaker.image);
-    if (image) {
-      const img = document.createElement('img');
-      img.src = image;
-      img.alt = '';
-      img.loading = 'lazy';
-      link.append(img);
-    }
-    const name = document.createElement('span');
-    name.textContent = speaker.name;
-    link.append(name);
-    const remove = document.createElement('button');
-    remove.type = 'button';
-    remove.className = 'header-favorites__remove';
-    remove.dataset.removeId = speaker.id;
-    remove.setAttribute('aria-label', `Remove ${speaker.name} from favorites`);
-    remove.textContent = '×';
-    item.append(link, remove);
-    list.append(item);
-  });
-};
-const blocks = () => document.querySelectorAll('.wp-block-crownspeakers-header-favorites');
 const refresh = () => {
-  blocks().forEach(renderList);
   updateButtons();
 
-  // Other places that show the count (e.g. the "Favorites" row in the mobile menu).
+  // Every place that shows the count: header link, mobile menu row.
   document.querySelectorAll('[data-favorites-count]').forEach(element => {
     element.textContent = String(favorites.length);
   });
+
+  // Let other blocks (e.g. the Favorites page block) react to changes.
+  document.dispatchEvent(new CustomEvent('cs:favorites-changed', {
+    detail: {
+      favorites: [...favorites]
+    }
+  }));
 };
 const toggleFavorite = button => {
   const {
@@ -141,7 +104,7 @@ const toggleFavorite = button => {
 document.addEventListener('DOMContentLoaded', () => {
   refresh();
 
-  // Favorite buttons anywhere on the page, and remove buttons in the dropdown.
+  // Favorite buttons anywhere on the page, and remove buttons (Favorites page block).
   document.addEventListener('click', event => {
     const favoriteButton = event.target.closest('[data-favorite]');
     const removeButton = event.target.closest('[data-remove-id]');
@@ -156,37 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Other scripts can ask for a re-sync after adding favorite buttons (e.g. carousel tabs).
+  document.addEventListener('cs:favorites-refresh', refresh);
+
   // Keep other open tabs in sync.
   window.addEventListener('storage', event => {
     if (event.key === STORAGE_KEY) {
       favorites = readFavorites();
       refresh();
     }
-  });
-
-  // Dropdown open/close.
-  blocks().forEach(block => {
-    const toggle = block.querySelector('.header-favorites__toggle');
-    const panel = block.querySelector('.header-favorites__panel');
-    const setOpen = open => {
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      panel.hidden = !open;
-    };
-    toggle.addEventListener('click', () => {
-      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && !panel.hidden) {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-    document.addEventListener('click', event => {
-      // Removing an item re-renders the list, so check the click target is still attached.
-      if (!panel.hidden && event.target.isConnected && !block.contains(event.target)) {
-        setOpen(false);
-      }
-    });
   });
 });
 /******/ })()

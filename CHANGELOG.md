@@ -1,5 +1,47 @@
 # Changelog
 
+## 2026-10-23
+
+### Added
+
+#### Blocks
+- `page-header`: dark page header with eyebrow, title and paragraph, all edited directly in the editor (an empty title falls back to the page title), plus a decorative crown on the right.
+- `topics-grid`: every speaker category with speakers, A–Z, as cards in a grid (1 → 5 columns), with an editable title above it.
+- `favorites`: the visitor's saved speakers as cards, with a ✓ badge that turns into "Remove ×", a "N speakers added" bar and an empty state. "Inquire about these speakers" reveals the Event Inquiry form under the bar, prefilled with the speaker names. On a page with the Global Form section it scrolls there and prefills it instead.
+
+#### Forms
+- WPForms "Event Inquiry" form (ID 27446) shown in the `global-form` section, styled like the design (two-column fields, gold submit button). The static form remains as a fallback when WPForms is off.
+- `setup/wpforms-event-inquiry.json`: import file for the form (name, email, phone, organization, event date, location, format, budget, previous speakers, event details), for setting it up on other environments.
+- `inc/Inquiry_Form.php`: single place for the form ID, used by `global-form` and `favorites`.
+
+#### Data and tooling
+- `inc/Rest_Api.php`: read-only endpoint `GET /wp-json/crownspeakers/v1/speakers?ids=…` (name, link, photo, tagline; public speakers only) used by the Favorites block.
+- `Speaker_Data`: search filters (`?topic=`, `?type=`), featured-speaker query and topic icons (`topic_icon()`).
+- Shared SCSS mixins: `_topic-card.scss` (explore-by-industry + topics-grid cards) and `_inquiry-form.scss` (WPForms styling for global-form + favorites).
+
+### Changed
+- Homepage hero search now works: it submits keyword and topic to `/all-speakers/`, the Topic dropdown lists the speaker categories, and the speakers grid filters by both. The "Speaker type" dropdown appears once a speaker type taxonomy exists (`Speaker_Data::TYPE_TAXONOMY`, assumed `speaker_type`).
+- `speakers-carousel`:
+  - "Featured" tab shows speakers with "Feature speaker" checked.
+  - Leadership, Inspiration, Business and Technology tabs show speakers from those `speaker_category` topics, switching without a page reload.
+  - New "Show tabs" option in the block settings. With tabs off: Featured speakers only, arrows next to "View all speakers", no empty gap.
+- `explore-by-industry`: cards come from the speaker categories (the 12 with the most speakers, or a hand-picked list in `$pinned_slugs`), each linking to its topic page, with an icon matched to the topic name.
+- Topics megamenu: shows the 16 most popular categories, A–Z.
+- Header "Favorites" is now a link to `/favorites/` with the count badge. The favorites dropdown was removed, and the mobile menu Favorites row links to `/favorites/` too.
+- Editor: the global stylesheet is loaded inside the editor iframe (`add_editor_style`), so blocks show the theme colors in the editor instead of a white background.
+- `speakers-grid`: removed the fixed 100% image width.
+
+### Fixed
+- `speakers-carousel` tabs did nothing when clicked (they used a Swiper method from a module that isn't loaded).
+
+### Removed
+- `templates/page-topics.html` and its `theme.json` entry. The Topics page is built from blocks (Page Header + Topics Grid) on the default page template.
+
+### Known gaps
+- "Speaker type" filter: no taxonomy found yet.
+- On another environment, the imported Event Inquiry form gets a new ID: update `Inquiry_Form::FORM_ID`.
+- The Favorites page must have the slug `favorites` for the header link.
+
 ## 2026-10-18
 
 ### Added

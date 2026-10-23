@@ -13,6 +13,10 @@ if ( $background_url ) {
 }
 
 $wrapper_attributes = get_block_wrapper_attributes( $extra_attributes );
+
+// WPForms "Event Inquiry" form shown in the right column (ID set in inc/Inquiry_Form.php).
+// If WPForms is off or the form doesn't exist, the static fallback form below is shown.
+$wpforms_id = \CS\Theme\Inquiry_Form::id();
 ?>
 
 <section <?php echo $wrapper_attributes; ?>>
@@ -38,6 +42,15 @@ $wrapper_attributes = get_block_wrapper_attributes( $extra_attributes );
 					1 (877) 882-5368
 				</a>
 			</div>
+
+			<?php if ( $wpforms_id ) : ?>
+
+				<div class="global-form__form global-form__form--wpforms">
+					<h3 class="global-form__form-title">Let us know what you have in mind</h3>
+					<?php \CS\Theme\Inquiry_Form::display(); ?>
+				</div>
+
+			<?php else : ?>
 
 			<form class="global-form__form" action="#" method="post">
 				<h3 class="global-form__form-title">Let us know what you have in mind</h3>
@@ -88,6 +101,8 @@ $wrapper_attributes = get_block_wrapper_attributes( $extra_attributes );
 					<button type="submit" class="global-form__submit">Submit Inquiry</button>
 				</div>
 			</form>
+
+			<?php endif; ?>
 
 		</div>
 

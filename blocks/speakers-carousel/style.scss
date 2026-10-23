@@ -25,6 +25,30 @@
 		}
 	}
 
+	// Tabs off: the header holds the arrows and provides the spacing above the slides.
+	.section-header--no-tabs {
+		margin-bottom: 2rem;
+
+		@include breakpoint(small) {
+			align-items: center;
+
+			.section-title {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.speakers-carousel__actions {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		gap: 1.5rem;
+
+		.speakers-carousel__view-all {
+			margin-top: 0;
+		}
+	}
+
 	.speakers-carousel__view-all {
 		flex-shrink: 0;
 		margin-top: 0.5rem;
@@ -79,10 +103,12 @@
 	}
 
 	// Slider arrows.
+	// `margin-left: auto` keeps the arrows on the right when tabs are hidden.
 	.speakers-carousel__nav {
 		display: flex;
 		flex-shrink: 0;
 		gap: 0.5rem;
+		margin-left: auto;
 	}
 
 	.speakers-carousel__arrow {

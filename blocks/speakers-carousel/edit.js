@@ -22,6 +22,7 @@ export default function Edit({ attributes, setAttributes }) {
 		buttonUrl,
 		logos,
 		autoplay,
+		showTabs,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -78,6 +79,19 @@ export default function Edit({ attributes, setAttributes }) {
 						checked={autoplay}
 						onChange={(value) =>
 							setAttributes({ autoplay: value })
+						}
+					/>
+
+					<ToggleControl
+						label="Show tabs"
+						help={
+							showTabs
+								? 'Featured + topic tabs.'
+								: 'Featured speakers only, no tabs.'
+						}
+						checked={showTabs}
+						onChange={(value) =>
+							setAttributes({ showTabs: value })
 						}
 					/>
 				</PanelBody>

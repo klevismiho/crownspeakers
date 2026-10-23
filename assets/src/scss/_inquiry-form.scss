@@ -1,0 +1,162 @@
+@use 'mixins' as *;
+
+// WPForms "Event Inquiry" form styling for dark backgrounds, shared by
+// `global-form` and the `favorites` popup.
+// Fields with the CSS class `cs-half` (WPForms → field → Advanced → CSS Classes)
+// take one column from `small`; all other fields span the full width.
+//
+// Usage, on the element that wraps wpforms_display():
+//
+//   .my-form-wrapper { @include inquiry-form; }
+@mixin inquiry-form {
+	.wpforms-container {
+		margin: 0;
+	}
+
+	.wpforms-form {
+		.wpforms-field-container {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 1.25rem 1rem;
+
+			@include breakpoint(small) {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		.wpforms-field {
+			grid-column: 1 / -1;
+			margin: 0;
+			padding: 0;
+
+			@include breakpoint(small) {
+				&.cs-half {
+					grid-column: auto;
+				}
+			}
+		}
+
+		.wpforms-field-label {
+			margin: 0 0 0.75rem;
+			font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+			font-size: 0.75rem;
+			font-weight: 400;
+			color: rgba(255, 255, 255, 0.85);
+		}
+
+		.wpforms-required-label {
+			color: var(--color-secondary);
+		}
+
+		.wpforms-field-description {
+			font-size: 0.75rem;
+			color: rgba(255, 255, 255, 0.7);
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="tel"],
+		input[type="date"],
+		input[type="number"],
+		select,
+		textarea {
+			width: 100%;
+			max-width: 100%;
+			height: auto;
+			min-height: 2.75rem;
+			padding: 0.75rem 0.875rem;
+			box-sizing: border-box;
+			border: 1px solid #d6dae1;
+			border-radius: 2px;
+			background-color: var(--color-white);
+			box-shadow: none;
+			font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+			font-size: 0.875rem;
+			color: var(--color-dark-gray);
+
+			&::placeholder {
+				color: #5b6675;
+			}
+
+			&:focus {
+				border-color: #d6dae1;
+				outline: 2px solid var(--color-secondary);
+				outline-offset: 1px;
+				box-shadow: none;
+			}
+		}
+
+		textarea {
+			min-height: 5.5rem;
+			resize: vertical;
+		}
+
+		// Validation errors, readable on the dark background.
+		label.wpforms-error,
+		em.wpforms-error {
+			margin-top: 0.375rem;
+			font-size: 0.75rem;
+			color: var(--color-secondary);
+		}
+
+		.wpforms-has-error input,
+		.wpforms-has-error textarea,
+		input.wpforms-error,
+		textarea.wpforms-error {
+			border-color: var(--color-secondary);
+		}
+
+		// Submit: gold pill, full width on phones, right-aligned from `small`.
+		.wpforms-submit-container {
+			display: flex;
+			justify-content: stretch;
+			margin-top: 1.5rem;
+			padding: 0;
+
+			@include breakpoint(small) {
+				justify-content: flex-end;
+			}
+		}
+
+		button[type="submit"],
+		.wpforms-submit {
+			flex: 1;
+			height: auto;
+			padding: 0.75rem 1.5rem;
+			border: 0;
+			border-radius: 999px;
+			background-color: var(--color-secondary);
+			box-shadow: none;
+			font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+			font-size: 0.9375rem;
+			font-weight: 400;
+			color: var(--color-dark-gray);
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+
+			&:hover,
+			&:focus {
+				background-color: var(--color-white);
+			}
+
+			@include breakpoint(small) {
+				flex: 0 0 auto;
+			}
+		}
+	}
+
+	// Message shown after a successful submission.
+	.wpforms-confirmation-container-full,
+	.wpforms-confirmation-container {
+		margin: 0;
+		padding: 1.5rem;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		border-radius: 0.5rem;
+		background: rgba(255, 255, 255, 0.08);
+		color: var(--color-white);
+
+		p {
+			margin: 0;
+		}
+	}
+}

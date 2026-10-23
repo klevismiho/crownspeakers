@@ -1,0 +1,115 @@
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/page-header/style.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+.wp-block-crownspeakers-page-header {
+  position: relative;
+  overflow: hidden;
+  margin-right: -1rem;
+  margin-left: -1rem;
+  padding: 3.5rem 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-page-header {
+    padding-block: 5.5rem 6.5rem;
+  }
+}
+.wp-block-crownspeakers-page-header .section-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 54rem;
+  margin: 0 auto;
+}
+.wp-block-crownspeakers-page-header .page-header__eyebrow {
+  margin: 0 0 1rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-page-header .page-header__eyebrow {
+    font-size: 1.125rem;
+  }
+}
+.wp-block-crownspeakers-page-header .page-header__title {
+  max-width: 46rem;
+  margin: 0 auto;
+  font-family: var(--wp--preset--font-family--crownspeakers-heading-font);
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-white);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-page-header .page-header__title {
+    font-size: 4rem;
+  }
+}
+.wp-block-crownspeakers-page-header .page-header__subtitle {
+  max-width: 54rem;
+  margin: 1.25rem auto 0;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 1rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.9);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-page-header .page-header__subtitle {
+    font-size: 1.125rem;
+  }
+}
+.wp-block-crownspeakers-page-header .page-header__subtitle a {
+  color: inherit;
+  text-decoration: underline;
+}
+.wp-block-crownspeakers-page-header .page-header__crown {
+  display: none;
+  position: absolute;
+  top: 1.25rem;
+  left: 0;
+  width: auto;
+  height: 120%;
+  max-width: none;
+  pointer-events: none;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-page-header .page-header__crown {
+    display: block;
+  }
+}

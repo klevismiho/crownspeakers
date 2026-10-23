@@ -1,12 +1,21 @@
 <?php
 
+use CS\Theme\Speaker_Data;
+
+// Searches go to the Speakers page, where speakers-grid reads ?keyword=, ?topic= and ?type=.
+$search_url = home_url('/all-speakers/');
+$selected   = Speaker_Data::selected_filters();
+$keyword    = isset($_GET['keyword']) ? sanitize_text_field(wp_unslash($_GET['keyword'])) : '';
+$topics     = Speaker_Data::filter_terms('speaker_category');
+$types      = Speaker_Data::filter_terms(Speaker_Data::TYPE_TAXONOMY);
+
 $wrapper_attributes = get_block_wrapper_attributes();
 ?>
 
 <section <?php echo $wrapper_attributes; ?>>
   <h1>Great events start<br />with <span>great people</span>.</h1>
   <p>Most of our clients found us once.<br />They’ve stayed ever since.</p>
-  <form class="hero-form" action="" method="get" role="search">
+  <form class="hero-form" action="<?php echo esc_url($search_url); ?>" method="get" role="search">
 
     <div class="field-group field-group--search">
       <label for="speaker-keyword" class="screen-reader-text">
@@ -31,6 +40,7 @@ $wrapper_attributes = get_block_wrapper_attributes();
         type="search"
         id="speaker-keyword"
         name="keyword"
+        value="<?php echo esc_attr($keyword); ?>"
         placeholder="Search by keyword" />
     </div>
 
@@ -38,15 +48,28 @@ $wrapper_attributes = get_block_wrapper_attributes();
       <label for="speaker-topic" class="screen-reader-text">Topic</label>
       <select id="speaker-topic" name="topic">
         <option value="">All topics</option>
+        <?php foreach ($topics as $topic) : ?>
+          <option value="<?php echo esc_attr($topic->slug); ?>" <?php selected($selected['topic'] ?? '', $topic->slug); ?>>
+            <?php echo esc_html($topic->name); ?>
+          </option>
+        <?php endforeach; ?>
       </select>
     </div>
 
-    <div class="field-group">
-      <label for="speaker-type" class="screen-reader-text">Speaker type</label>
-      <select id="speaker-type" name="type">
-        <option value="">All speaker types</option>
-      </select>
-    </div>
+    <?php // Shown only once the speaker type taxonomy exists (see Speaker_Data::TYPE_TAXONOMY). ?>
+    <?php if ($types) : ?>
+      <div class="field-group">
+        <label for="speaker-type" class="screen-reader-text">Speaker type</label>
+        <select id="speaker-type" name="type">
+          <option value="">All speaker types</option>
+          <?php foreach ($types as $type) : ?>
+            <option value="<?php echo esc_attr($type->slug); ?>" <?php selected($selected['type'] ?? '', $type->slug); ?>>
+              <?php echo esc_html($type->name); ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+    <?php endif; ?>
 
     <div class="field-group">
       <button type="submit" class="wp-block-button__link wp-element-button">Find my speaker</button>

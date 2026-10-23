@@ -1,0 +1,409 @@
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/favorites/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+/**
+ * Mobile-first breakpoint mixin.
+ *
+ * Usage:
+ *
+ * .element {
+ *   padding: 1rem;
+ *
+ *   @include breakpoint(medium) {
+ *     padding: 2rem;
+ *   }
+ * }
+ */
+/**
+ * Max-width breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-down(medium) {
+ *   ...
+ * }
+ */
+/**
+ * Range breakpoint mixin.
+ *
+ * Usage:
+ *
+ * @include breakpoint-between(small, large) {
+ *   ...
+ * }
+ */
+.wp-block-crownspeakers-favorites {
+  padding: 3rem 0 4rem;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-favorites {
+    padding-top: 4rem;
+  }
+}
+.wp-block-crownspeakers-favorites .section-inner {
+  max-width: var(--wp--style--global--content-size);
+  margin: 0 auto;
+}
+.wp-block-crownspeakers-favorites.is-loading .favorites__list {
+  opacity: 0.5;
+}
+.wp-block-crownspeakers-favorites .favorites__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem 1.25rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+  transition: opacity 0.2s ease;
+}
+.wp-block-crownspeakers-favorites .favorites__list:empty {
+  display: none;
+}
+@media (min-width: 480px) {
+  .wp-block-crownspeakers-favorites .favorites__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .wp-block-crownspeakers-favorites .favorites__list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.wp-block-crownspeakers-favorites .favorites__media {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+.wp-block-crownspeakers-favorites .favorites__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 289/300;
+  object-fit: cover;
+  border-radius: 0.375rem;
+}
+.wp-block-crownspeakers-favorites .favorites__image--empty {
+  background-color: #e5e8ee;
+}
+.wp-block-crownspeakers-favorites .favorites__remove {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 2rem;
+  padding: 0 0.625rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--color-dark-gray);
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.8125rem;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: gap 0.2s ease, padding 0.2s ease;
+}
+.wp-block-crownspeakers-favorites .favorites__remove svg {
+  flex-shrink: 0;
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-favorites .favorites__remove .favorites__close {
+  display: none;
+}
+.wp-block-crownspeakers-favorites .favorites__remove:hover, .wp-block-crownspeakers-favorites .favorites__remove:focus-visible {
+  gap: 0.625rem;
+  padding-inline: 1.25rem 0.875rem;
+}
+.wp-block-crownspeakers-favorites .favorites__remove:hover .favorites__check, .wp-block-crownspeakers-favorites .favorites__remove:focus-visible .favorites__check {
+  display: none;
+}
+.wp-block-crownspeakers-favorites .favorites__remove:hover .favorites__close, .wp-block-crownspeakers-favorites .favorites__remove:focus-visible .favorites__close {
+  display: block;
+}
+.wp-block-crownspeakers-favorites .favorites__remove:hover .favorites__remove-label, .wp-block-crownspeakers-favorites .favorites__remove:focus-visible .favorites__remove-label {
+  max-width: 6rem;
+  opacity: 1;
+}
+.wp-block-crownspeakers-favorites .favorites__remove:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+.wp-block-crownspeakers-favorites .favorites__remove-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 0.2s ease, opacity 0.2s ease;
+}
+.wp-block-crownspeakers-favorites .favorites__name {
+  margin: 0 0 0.75rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.wp-block-crownspeakers-favorites .favorites__name a {
+  color: var(--color-dark-gray);
+  text-decoration: none;
+}
+.wp-block-crownspeakers-favorites .favorites__name a:hover {
+  color: var(--color-primary);
+}
+.wp-block-crownspeakers-favorites .favorites__tagline {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: #5b6675;
+}
+.wp-block-crownspeakers-favorites .favorites__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.wp-block-crownspeakers-favorites .favorites__bar[hidden] {
+  display: none;
+}
+.wp-block-crownspeakers-favorites .favorites__count {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-dark-gray);
+}
+.wp-block-crownspeakers-favorites .favorites__inquire,
+.wp-block-crownspeakers-favorites .favorites__browse {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  background-color: var(--color-secondary);
+  font-size: 1rem;
+  color: var(--color-dark-gray);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.wp-block-crownspeakers-favorites .favorites__inquire:hover,
+.wp-block-crownspeakers-favorites .favorites__browse:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-favorites .favorites__inquire {
+  flex: 1 0 100%;
+  text-align: center;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-favorites .favorites__inquire {
+    flex: 0 0 auto;
+  }
+}
+.wp-block-crownspeakers-favorites .favorites__empty {
+  padding: 3rem 0;
+  text-align: center;
+}
+.wp-block-crownspeakers-favorites .favorites__empty p {
+  margin: 0 0 1.5rem;
+  font-size: 1.25rem;
+  color: var(--color-dark-gray);
+}
+.wp-block-crownspeakers-favorites .favorites__empty[hidden] {
+  display: none;
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry {
+  margin-top: 2rem;
+  padding: 2rem 1.25rem;
+  border-radius: 0.75rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  scroll-margin-top: 2rem;
+  animation: favorites-inquiry-in 0.25s ease;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-favorites .favorites__inquiry {
+    padding: 3rem;
+  }
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry[hidden] {
+  display: none;
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-heading-font);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-white);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-favorites .favorites__inquiry-title {
+    font-size: 2.25rem;
+  }
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-speakers {
+  margin: 0 0 2rem;
+  font-size: 1rem;
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-container {
+  margin: 0;
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-field-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem 1rem;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-field-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-field {
+  grid-column: 1/-1;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-field.cs-half {
+    grid-column: auto;
+  }
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-field-label {
+  margin: 0 0 0.75rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-required-label {
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-field-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=text],
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=email],
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=tel],
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=date],
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=number],
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form select,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form textarea {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 2.75rem;
+  padding: 0.75rem 0.875rem;
+  box-sizing: border-box;
+  border: 1px solid #d6dae1;
+  border-radius: 2px;
+  background-color: var(--color-white);
+  box-shadow: none;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.875rem;
+  color: var(--color-dark-gray);
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=text]::placeholder,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=email]::placeholder,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=tel]::placeholder,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=date]::placeholder,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=number]::placeholder,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form select::placeholder,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form textarea::placeholder {
+  color: #5b6675;
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=text]:focus,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=email]:focus,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=tel]:focus,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=date]:focus,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input[type=number]:focus,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form select:focus,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form textarea:focus {
+  border-color: #d6dae1;
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form label.wpforms-error,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form em.wpforms-error {
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-has-error input,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-has-error textarea,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form input.wpforms-error,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form textarea.wpforms-error {
+  border-color: var(--color-secondary);
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-submit-container {
+  display: flex;
+  justify-content: stretch;
+  margin-top: 1.5rem;
+  padding: 0;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-submit-container {
+    justify-content: flex-end;
+  }
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form button[type=submit],
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-submit {
+  flex: 1;
+  height: auto;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--color-secondary);
+  box-shadow: none;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-dark-gray);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form button[type=submit]:hover, .wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form button[type=submit]:focus,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-submit:hover,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-submit:focus {
+  background-color: var(--color-white);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form button[type=submit],
+  .wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-form .wpforms-submit {
+    flex: 0 0 auto;
+  }
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-confirmation-container-full,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-confirmation-container {
+  margin: 0;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-confirmation-container-full p,
+.wp-block-crownspeakers-favorites .favorites__inquiry-form .wpforms-confirmation-container p {
+  margin: 0;
+}
+@keyframes favorites-inquiry-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wp-block-crownspeakers-favorites .favorites__inquiry {
+    animation: none;
+  }
+}
+
+/*# sourceMappingURL=style-index.css.map*/

@@ -10988,7 +10988,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const block = swiperElement.closest('.wp-block-crownspeakers-speakers-carousel');
     const autoplay = block?.dataset.autoplay === 'true';
-    new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](swiperElement, {
+
+    // Every slide, with the tabs it belongs to (`data-tabs`), kept so tabs can swap them in and out.
+    const allSlides = Array.from(swiperElement.querySelectorAll('.speakers-carousel__item'));
+    const tabs = block ? Array.from(block.querySelectorAll('.speakers-carousel__tab')) : [];
+    const slidesFor = tab => allSlides.filter(slide => (slide.dataset.tabs || '').split(' ').includes(tab));
+
+    // Start with only the active tab's speakers.
+    const activeTab = swiperElement.dataset.activeTab;
+    if (activeTab) {
+      const activeSlides = slidesFor(activeTab);
+      allSlides.filter(slide => !activeSlides.includes(slide)).forEach(slide => slide.remove());
+    }
+    const swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](swiperElement, {
       modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation],
       slidesPerView: 1,
       spaceBetween: 16,
@@ -11017,6 +11029,24 @@ document.addEventListener('DOMContentLoaded', () => {
           spaceBetween: 32
         }
       }
+    });
+    tabs.forEach(tabButton => {
+      tabButton.addEventListener('click', () => {
+        const tab = tabButton.dataset.tab;
+        tabs.forEach(button => {
+          const isActive = button === tabButton;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        // Swap the slides in the DOM (Swiper's appendSlide needs its Manipulation module), then re-measure.
+        swiper.wrapperEl.replaceChildren(...slidesFor(tab));
+        swiper.update();
+        swiper.slideTo(0, 0);
+
+        // Re-sync favorite buttons on the slides that were just put back.
+        document.dispatchEvent(new CustomEvent('cs:favorites-refresh'));
+      });
     });
   });
 });

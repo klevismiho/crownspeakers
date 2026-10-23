@@ -21,6 +21,10 @@
       "type": "boolean",
       "default": false
     },
+    "showTabs": {
+      "type": "boolean",
+      "default": true
+    },
     "logos": {
       "type": "array",
       "default": [],

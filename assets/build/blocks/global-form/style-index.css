@@ -228,5 +228,151 @@
     flex: 0 0 auto;
   }
 }
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-container {
+  margin: 0;
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-field-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem 1rem;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-field-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-field {
+  grid-column: 1/-1;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-field.cs-half {
+    grid-column: auto;
+  }
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-field-label {
+  margin: 0 0 0.75rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-required-label {
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-field-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=text],
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=email],
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=tel],
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=date],
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=number],
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form select,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form textarea {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 2.75rem;
+  padding: 0.75rem 0.875rem;
+  box-sizing: border-box;
+  border: 1px solid #d6dae1;
+  border-radius: 2px;
+  background-color: var(--color-white);
+  box-shadow: none;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.875rem;
+  color: var(--color-dark-gray);
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=text]::placeholder,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=email]::placeholder,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=tel]::placeholder,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=date]::placeholder,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=number]::placeholder,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form select::placeholder,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form textarea::placeholder {
+  color: #5b6675;
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=text]:focus,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=email]:focus,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=tel]:focus,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=date]:focus,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input[type=number]:focus,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form select:focus,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form textarea:focus {
+  border-color: #d6dae1;
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form label.wpforms-error,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form em.wpforms-error {
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-has-error input,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-has-error textarea,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form input.wpforms-error,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form textarea.wpforms-error {
+  border-color: var(--color-secondary);
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-submit-container {
+  display: flex;
+  justify-content: stretch;
+  margin-top: 1.5rem;
+  padding: 0;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-submit-container {
+    justify-content: flex-end;
+  }
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form button[type=submit],
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-submit {
+  flex: 1;
+  height: auto;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--color-secondary);
+  box-shadow: none;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-dark-gray);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form button[type=submit]:hover, .wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form button[type=submit]:focus,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-submit:hover,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-submit:focus {
+  background-color: var(--color-white);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form button[type=submit],
+  .wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-form .wpforms-submit {
+    flex: 0 0 auto;
+  }
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-confirmation-container-full,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-confirmation-container {
+  margin: 0;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+}
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-confirmation-container-full p,
+.wp-block-crownspeakers-global-form .global-form__form--wpforms .wpforms-confirmation-container p {
+  margin: 0;
+}
 
 /*# sourceMappingURL=style-index.css.map*/

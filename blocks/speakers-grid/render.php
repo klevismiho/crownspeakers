@@ -19,14 +19,18 @@ if ( $keyword ) {
 	$query_args['s'] = $keyword;
 }
 
-// On a topic page (taxonomy-speaker_category template), only show that topic's speakers.
+// Taxonomy filters: ?topic= / ?type= from the hero search, and the current topic on topic pages.
+$tax_query = Speaker_Data::filters_tax_query();
+
 if ( is_tax( 'speaker_category' ) ) {
-	$query_args['tax_query'] = array(
-		array(
-			'taxonomy' => 'speaker_category',
-			'terms'    => get_queried_object_id(),
-		),
+	$tax_query[] = array(
+		'taxonomy' => 'speaker_category',
+		'terms'    => get_queried_object_id(),
 	);
+}
+
+if ( $tax_query ) {
+	$query_args['tax_query'] = array_merge( array( 'relation' => 'AND' ), $tax_query );
 }
 
 $speakers = new WP_Query( $query_args );

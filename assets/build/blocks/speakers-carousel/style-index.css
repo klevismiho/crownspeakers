@@ -54,6 +54,26 @@
     margin-bottom: 0;
   }
 }
+.wp-block-crownspeakers-speakers-carousel .section-header--no-tabs {
+  margin-bottom: 2rem;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-speakers-carousel .section-header--no-tabs {
+    align-items: center;
+  }
+  .wp-block-crownspeakers-speakers-carousel .section-header--no-tabs .section-title {
+    margin-bottom: 0;
+  }
+}
+.wp-block-crownspeakers-speakers-carousel .speakers-carousel__actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 1.5rem;
+}
+.wp-block-crownspeakers-speakers-carousel .speakers-carousel__actions .speakers-carousel__view-all {
+  margin-top: 0;
+}
 .wp-block-crownspeakers-speakers-carousel .speakers-carousel__view-all {
   flex-shrink: 0;
   margin-top: 0.5rem;
@@ -105,6 +125,7 @@
   display: flex;
   flex-shrink: 0;
   gap: 0.5rem;
+  margin-left: auto;
 }
 .wp-block-crownspeakers-speakers-carousel .speakers-carousel__arrow {
   display: flex;

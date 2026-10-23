@@ -93,7 +93,8 @@ function Edit({
     buttonText,
     buttonUrl,
     logos,
-    autoplay
+    autoplay,
+    showTabs
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)();
   const updateLogo = (index, field, value) => {
@@ -132,16 +133,23 @@ function Edit({
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
         title: "Carousel Settings",
         initialOpen: true,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
           label: "Autoplay",
           checked: autoplay,
           onChange: value => setAttributes({
             autoplay: value
           })
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+          label: "Show tabs",
+          help: showTabs ? 'Featured + topic tabs.' : 'Featured speakers only, no tabs.',
+          checked: showTabs,
+          onChange: value => setAttributes({
+            showTabs: value
+          })
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
         title: "Logos",
         initialOpen: true,
@@ -341,7 +349,7 @@ function save() {
   \*********************************************/
 (module) {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"crownspeakers/speakers-carousel","version":"1.0.0","title":"Speakers Carousel","category":"crownspeakers","icon":"grid-view","description":"Speakers Carousel","example":{"viewportWidth":1200},"supports":{"html":false,"align":["full"]},"attributes":{"autoplay":{"type":"boolean","default":false},"logos":{"type":"array","default":[],"items":{"type":"object"}}},"textdomain":"crownspeakers","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"crownspeakers/speakers-carousel","version":"1.0.0","title":"Speakers Carousel","category":"crownspeakers","icon":"grid-view","description":"Speakers Carousel","example":{"viewportWidth":1200},"supports":{"html":false,"align":["full"]},"attributes":{"autoplay":{"type":"boolean","default":false},"showTabs":{"type":"boolean","default":true},"logos":{"type":"array","default":[],"items":{"type":"object"}}},"textdomain":"crownspeakers","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
 
 /***/ }
 

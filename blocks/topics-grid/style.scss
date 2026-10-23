@@ -1,0 +1,69 @@
+@use '../../assets/src/scss/mixins' as *;
+@use '../../assets/src/scss/topic-card' as *;
+
+.wp-block-crownspeakers-topics-grid {
+	padding: 2rem 0 4rem;
+
+	.section-inner {
+		max-width: var(--wp--style--global--content-size);
+		margin: 0 auto;
+	}
+
+	.section-title {
+		margin: 0 0 2rem;
+		font-size: 2rem;
+		line-height: 1.05;
+		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			margin-bottom: 3rem;
+			font-size: 2.5rem;
+		}
+	}
+
+	// Editor only: the grid itself is rendered on the website.
+	.topics-grid__editor-note {
+		margin: 0;
+		font-size: 0.875rem;
+		color: #5b6675;
+	}
+
+	// 1 column on small phones → 5 on wide screens.
+	.topics-grid__list {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		@media (min-width: 480px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include breakpoint(small) {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1.5rem;
+		}
+
+		@include breakpoint(medium) {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 1.75rem;
+		}
+
+		@include breakpoint(large) {
+			grid-template-columns: repeat(5, 1fr);
+		}
+
+		li {
+			display: flex;
+		}
+	}
+
+	// Same cards as explore-by-industry.
+	@include topic-card('topics-grid');
+
+	.topics-grid__card {
+		width: 100%;
+	}
+}

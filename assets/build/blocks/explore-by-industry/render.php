@@ -1,32 +1,50 @@
 <?php
 
-$industries = array(
-	array(
-		'title' => 'Technology',
-		'url'   => '#',
-		'icon'  => '<rect x="7" y="7" width="10" height="10" rx="1.5" /><rect x="10" y="10" width="4" height="4" /><path d="M10 4v3M14 4v3M10 17v3M14 17v3M4 10h3M4 14h3M17 10h3M17 14h3" />',
-	),
-	array(
-		'title' => 'Healthcare & life sciences',
-		'url'   => '#',
-		'icon'  => '<path d="M12 20s-7.5-4.5-7.5-10A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 7.5 3c0 5.5-7.5 10-7.5 10z" /><path d="M12 10.5v4M10 12.5h4" />',
-	),
-	array(
-		'title' => 'Financial services & insurance',
-		'url'   => '#',
-		'icon'  => '<path d="M4 9.5 12 5l8 4.5M5 9.5h14M6.5 9.5v7M10 9.5v7M14 9.5v7M17.5 9.5v7M4 19h16" />',
-	),
-	array(
-		'title' => 'Education',
-		'url'   => '#',
-		'icon'  => '<path d="m3 9.5 9-4.5 9 4.5-9 4.5-9-4.5z" /><path d="M7 11.5V16c0 1.2 2.2 2.5 5 2.5s5-1.3 5-2.5v-4.5M21 9.5V14" />',
-	),
-	array(
-		'title' => 'Retail & consumer goods',
-		'url'   => '#',
-		'icon'  => '<path d="M6 8h12l-1 12H7L6 8z" /><path d="M9 8V7a3 3 0 0 1 6 0v1" />',
-	),
+// Cards come from the `speaker_category` taxonomy.
+// By default: the categories with the most speakers. To hand-pick cards (in this order),
+// list their slugs in $pinned_slugs; when it isn't empty it replaces the automatic choice.
+$limit        = 12;
+$pinned_slugs = array(
+	// 'technology',
+	// 'healthcare',
 );
+
+$terms = array();
+
+if (taxonomy_exists('speaker_category')) {
+	$terms = $pinned_slugs
+		? get_terms(
+			array(
+				'taxonomy'   => 'speaker_category',
+				'slug'       => $pinned_slugs,
+				'orderby'    => 'slug__in',
+				'hide_empty' => false,
+			)
+		)
+		: get_terms(
+			array(
+				'taxonomy'   => 'speaker_category',
+				'orderby'    => 'count',
+				'order'      => 'DESC',
+				'hide_empty' => true,
+				'number'     => $limit,
+			)
+		);
+}
+
+$industries = array();
+
+foreach (is_wp_error($terms) ? array() : $terms as $term) {
+	$industries[] = array(
+		'title' => $term->name,
+		'url'   => get_term_link($term),
+		'icon'  => \CS\Theme\Speaker_Data::topic_icon($term->name),
+	);
+}
+
+if (! $industries) {
+	return;
+}
 
 $wrapper_attributes = get_block_wrapper_attributes();
 ?>

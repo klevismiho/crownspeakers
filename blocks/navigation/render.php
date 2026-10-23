@@ -26,6 +26,7 @@ foreach ($items as $item) {
 // Mobile panel extras (rows under the menu + call-to-action card).
 $contact_url  = home_url('/contact/');
 $speakers_url = home_url('/all-speakers/');
+$favorites_url = home_url('/favorites/');
 $phone_label  = '1 (877) 882-5368';
 $phone_href   = 'tel:+18778825368';
 $nav_panel_id = wp_unique_id('navigation-panel-');
@@ -64,7 +65,8 @@ $chevron = '<svg class="wp-block-crownspeakers-navigation__chevron" width="8" he
 			$is_mega      = in_array('topics-menu', $item_classes, true);
 			$panel_id     = 'mega-menu-' . $item->ID;
 
-			// Topic links: always the speaker categories (menu sub-items are ignored for the megamenu).
+			// Topic links: the 16 speaker categories with the most speakers, listed A–Z
+			// (menu sub-items are ignored for the megamenu).
 			$mega_links = array();
 
 			if ($is_mega && taxonomy_exists('speaker_category')) {
@@ -72,12 +74,15 @@ $chevron = '<svg class="wp-block-crownspeakers-navigation__chevron" width="8" he
 					array(
 						'taxonomy'   => 'speaker_category',
 						'hide_empty' => true,
-						'orderby'    => 'name',
-						'parent'     => 0,
+						'orderby'    => 'count',
+						'order'      => 'DESC',
+						'number'     => 16,
 					)
 				);
 
 				if (! is_wp_error($topics)) {
+					usort($topics, static fn($a, $b) => strcasecmp($a->name, $b->name));
+
 					foreach ($topics as $topic) {
 						$mega_links[] = array('title' => $topic->name, 'url' => get_term_link($topic));
 					}
@@ -174,13 +179,13 @@ $chevron = '<svg class="wp-block-crownspeakers-navigation__chevron" width="8" he
 
 		<ul class="wp-block-crownspeakers-navigation__rows">
 			<li>
-				<button type="button" class="wp-block-crownspeakers-navigation__row" data-open-favorites>
+				<a class="wp-block-crownspeakers-navigation__row" href="<?php echo esc_url($favorites_url); ?>">
 					<span>
 						Favorites
 						<span class="wp-block-crownspeakers-navigation__badge" data-favorites-count>0</span>
 					</span>
 					<?php echo $chevron; ?>
-				</button>
+				</a>
 			</li>
 			<li>
 				<a class="wp-block-crownspeakers-navigation__row" href="<?php echo esc_url($contact_url); ?>">

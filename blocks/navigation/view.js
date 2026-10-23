@@ -42,12 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			});
 
-			// "Favorites" row: close the panel and open the header favorites dropdown.
-			// Opened after this tap finishes bubbling, so the dropdown's "click outside" handler doesn't close it.
-			panel.querySelector('[data-open-favorites]')?.addEventListener('click', () => {
-				setMenuOpen(false);
-				window.setTimeout(() => header?.querySelector('.header-favorites__toggle')?.click(), 0);
-			});
 		}
 
 		// Regular dropdowns (the megamenu has its own handling below).

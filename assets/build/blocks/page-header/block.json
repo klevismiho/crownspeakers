@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "crownspeakers/page-header",
+  "version": "1.0.0",
+  "title": "Page Header",
+  "category": "crownspeakers",
+  "icon": "heading",
+  "description": "Dark page header with title, subtitle and crown",
+  "example": {
+    "viewportWidth": 1200,
+    "attributes": {
+      "eyebrow": "AI & Futurist speakers",
+      "title": "Explore our topics",
+      "subtitle": "Find the right voice for your audience."
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "subtitle": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "usesContext": [
+    "postId",
+    "postType"
+  ],
+  "textdomain": "crownspeakers",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

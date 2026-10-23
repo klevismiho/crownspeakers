@@ -1,4 +1,5 @@
 @use '../../assets/src/scss/mixins' as *;
+@use '../../assets/src/scss/inquiry-form' as *;
 
 .wp-block-crownspeakers-global-form {
 	position: relative;
@@ -215,5 +216,10 @@
 		@include breakpoint(small) {
 			flex: 0 0 auto;
 		}
+	}
+
+	// WPForms "Event Inquiry" form, styled like the static form above (shared mixin).
+	.global-form__form--wpforms {
+		@include inquiry-form;
 	}
 }
