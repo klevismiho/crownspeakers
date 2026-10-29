@@ -21,7 +21,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					tagName="h1"
 					className="page-header__title"
 					value={ title }
-					allowedFormats={ [ 'core/italic' ] }
+					allowedFormats={ [ 'core/italic', 'crownspeakers/highlight' ] }
 					onChange={ ( value ) => setAttributes( { title: value } ) }
 					placeholder="Page title (empty = the page’s own title)"
 				/>

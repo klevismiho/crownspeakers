@@ -17,15 +17,17 @@
 		}
 	}
 
+	// Centered above the logos on phones; left-aligned beside them from `small`.
 	.section-title {
 		margin-top: 0;
-
 		font-size: 1.25rem;
 		color: var(--color-primary);
+		text-align: center;
 
 		@include breakpoint(small) {
 			flex-shrink: 0;
 			width: 25%;
+			text-align: left;
 		}
 	}
 

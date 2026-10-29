@@ -4,6 +4,14 @@
 .wp-block-crownspeakers-speakers-carousel {
 	padding: 4rem 0;
 
+	// "Background: Light gray" (block settings): full-width light section, like Statistics and Features.
+	&.has-light-background {
+		margin-left: -1rem;
+		margin-right: -1rem;
+		padding-inline: 1rem;
+		background-color: #e5e8ee;
+	}
+
 	.section-inner {
 		max-width: var(--wp--style--global--content-size);
 		margin: 0 auto;

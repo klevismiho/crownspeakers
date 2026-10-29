@@ -1,0 +1,62 @@
+{
+    "key": "group_cs_team_member",
+    "title": "Team Member",
+    "fields": [
+        {
+            "key": "field_cs_team_role",
+            "label": "Job title",
+            "name": "team_role",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Shown under the name, e.g. \"Founder & CEO\".",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Founder & CEO",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_cs_team_linkedin",
+            "label": "LinkedIn",
+            "name": "team_linkedin",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Optional link to their LinkedIn profile.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https://www.linkedin.com/in/…"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "team"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Job title and LinkedIn for team members.",
+    "show_in_rest": 0,
+    "modified": 1793318400
+}

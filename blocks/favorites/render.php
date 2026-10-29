@@ -7,8 +7,10 @@ $speakers_url = home_url( '/all-speakers/' );
 $contact_url  = home_url( '/contact/' );
 
 // "Inquire about these speakers" reveals the inquiry form right under the bar, unless the page already
-// has a Global Form section (the same WPForms form can't be on a page twice) — then it scrolls there.
-$show_inquiry = \CS\Theme\Inquiry_Form::id() && ! has_block( 'crownspeakers/global-form', get_the_ID() );
+// has a Global Form or Contact section (the same WPForms form can't be on a page twice) — then it scrolls there.
+$show_inquiry = \CS\Theme\Inquiry_Form::id()
+	&& ! has_block( 'crownspeakers/global-form', get_the_ID() )
+	&& ! has_block( 'crownspeakers/contact', get_the_ID() );
 $inquiry_id   = wp_unique_id( 'favorites-inquiry-' );
 
 $wrapper_attributes = get_block_wrapper_attributes(

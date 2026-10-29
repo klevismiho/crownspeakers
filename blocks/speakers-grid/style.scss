@@ -18,47 +18,243 @@
 			margin-bottom: 4rem;
 		}
 
-		.section-inner {
+		// Phones: [Refine | Sort] as two equal halves, the speaker count underneath.
+		// From `small`: Refine + count on the left, Sort by on the right.
+		> .section-inner {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			align-items: center;
+			gap: 0.625rem 0.75rem;
+
+			@include breakpoint(small) {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				gap: 0.75rem 1rem;
+			}
+		}
+	}
+
+	// Phones: its children join the grid above. From `small`: a flex group.
+	.speakers-grid__toolbar-start {
+		display: contents;
+
+		@include breakpoint(small) {
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: space-between;
 			align-items: center;
-			gap: 0.75rem 1rem;
+			gap: 0.75rem 1.5rem;
+		}
+	}
+
+	.speakers-grid__total {
+		grid-row: 2;
+		grid-column: 1 / -1;
+		margin: 0;
+		font-size: 0.875rem;
+		color: #5b6675;
+
+		@include breakpoint(small) {
+			font-size: 0.9375rem;
 		}
 	}
 
 	.speakers-grid__refine {
+		grid-row: 1;
+		grid-column: 1;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 2.5rem;
-		padding: 0.875rem 1rem;
+		gap: 0.75rem;
+		width: 100%;
+		min-width: 0;
+		min-height: 2.875rem;
+		padding: 0.75rem 1rem;
 		border: 1px solid #d6dae1;
 		border-radius: 2px;
 		background-color: var(--color-white);
 		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
-		font-size: 1rem;
+		font-size: 0.9375rem;
 		color: var(--color-dark-gray);
+		text-align: left;
 		cursor: pointer;
 
+		svg {
+			flex-shrink: 0;
+			transition: transform 0.2s ease;
+		}
+
+		// + turns into × while the panel is open.
+		&[aria-expanded="true"] svg {
+			transform: rotate(45deg);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--color-secondary);
+			outline-offset: 2px;
+		}
+
 		@include breakpoint(small) {
+			gap: 2.5rem;
+			width: auto;
 			min-width: 11.25rem;
+			padding-block: 0.875rem;
+			font-size: 1rem;
 		}
 	}
 
-	.speakers-grid__sort {
+	.speakers-grid__refine-count {
+		font-weight: 500;
+		color: var(--color-primary);
+	}
+
+	// Filter panel, inside the toolbar strip under the row.
+	.speakers-grid__panel {
+		margin-top: 0.75rem;
+		padding: 1.5rem 0 0.75rem;
+		border-top: 1px solid #d6dae1;
+
+		&[hidden] {
+			display: none;
+		}
+	}
+
+	// 1 → 2 → 3 columns of fields.
+	.speakers-grid__fields {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+
+		@include breakpoint(small) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include breakpoint(medium) {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1rem 1.5rem;
+		}
+	}
+
+	.speakers-grid__field {
 		display: flex;
-		align-items: center;
-		gap: 0.75rem;
+		flex-direction: column;
+		gap: 0.5rem;
 
 		label {
+			font-size: 0.8125rem;
+			color: #5b6675;
+		}
+
+		input,
+		select {
+			width: 100%;
+			min-height: 2.875rem;
+			padding: 0.75rem 1rem;
+			box-sizing: border-box;
+			border: 1px solid #d6dae1;
+			border-radius: 2px;
+			background-color: var(--color-white);
+			font-family: var(--wp--preset--font-family--crownspeakers-body-font);
 			font-size: 1rem;
 			color: var(--color-dark-gray);
-			white-space: nowrap;
+
+			&:focus {
+				outline: 2px solid var(--color-primary);
+				outline-offset: 1px;
+			}
 		}
 
 		select {
-			min-width: 8.5rem;
+			padding-right: 2.5rem;
+			background: var(--color-white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='m3 4.5 3 3 3-3' stroke='%23142333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 1rem center;
+			appearance: none;
+			cursor: pointer;
+		}
+	}
+
+	.speakers-grid__panel-actions {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 1rem;
+		margin-top: 1.5rem;
+		text-align: center;
+
+		@include breakpoint(small) {
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 1rem 1.5rem;
+			text-align: left;
+		}
+	}
+
+	.speakers-grid__apply {
+		padding: 0.75rem 1.75rem;
+		border: 0;
+		border-radius: 999px;
+		background-color: var(--color-primary);
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 1rem;
+		color: var(--color-white);
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: var(--color-dark-gray);
+		}
+	}
+
+	.speakers-grid__clear {
+		font-size: 1rem;
+		color: var(--color-primary);
+		text-decoration: underline;
+		text-underline-offset: 0.25em;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	.speakers-grid__sort-submit {
+		padding: 0.75rem 1rem;
+		border: 1px solid #d6dae1;
+		background: var(--color-white);
+		cursor: pointer;
+	}
+
+	.speakers-grid__sort {
+		grid-row: 1;
+		grid-column: 2;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		min-width: 0;
+
+		// Visually hidden on phones (the dropdown shows the current sort), visible from `small`.
+		label {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+			clip: rect(0 0 0 0);
+			font-size: 1rem;
+			color: var(--color-dark-gray);
+			white-space: nowrap;
+
+			@include breakpoint(small) {
+				position: static;
+				width: auto;
+				height: auto;
+				overflow: visible;
+				clip: auto;
+			}
+		}
+
+		select {
+			width: 100%;
+			min-width: 0;
+			min-height: 2.875rem;
 			padding: 0.75rem 2.5rem 0.75rem 1rem;
 			border: 1px solid #d6dae1;
 			border-radius: 2px;
@@ -68,6 +264,11 @@
 			color: var(--color-dark-gray);
 			appearance: none;
 			cursor: pointer;
+
+			@include breakpoint(small) {
+				width: auto;
+				min-width: 8.5rem;
+			}
 		}
 	}
 
@@ -159,12 +360,15 @@
 		color: #5b6675;
 	}
 
+	// Long category lists scroll inside the card instead of making it taller.
 	.speakers-grid__categories {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.375rem;
+		max-height: 96px;
 		margin: 0 0 1.25rem;
 		padding: 0;
+		overflow-y: auto;
 		list-style: none;
 	}
 
@@ -229,8 +433,13 @@
 	}
 
 	.speakers-grid__empty {
-		margin: 0;
+		padding: 2rem 0;
 		text-align: center;
 		color: #5b6675;
+
+		p {
+			margin: 0 0 1rem;
+			font-size: 1.125rem;
+		}
 	}
 }

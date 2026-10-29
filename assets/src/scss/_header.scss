@@ -1,7 +1,6 @@
 @use 'mixins' as *;
 
-// Mobile: logo | search, favorites badge | hamburger.
-// From `small`: Contact Us and the "Favorites" label appear.
+// Below `medium`: logo | Contact Us | hamburger (search and favorites are in the mobile menu).
 // From `medium`: logo | inline menu | search, favorites, Contact Us.
 .site-header {
     // Anchor for the mobile menu, megamenu, search and favorites panels.
@@ -27,41 +26,62 @@
         }
     }
 
+    // The logo may shrink on very narrow phones so Contact Us and the hamburger always fit.
     .wp-block-site-logo {
-        flex-shrink: 0;
+        flex-shrink: 1;
+        min-width: 0;
         order: 1;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @include breakpoint(medium) {
+            flex-shrink: 0;
+        }
     }
 
     .header-actions {
         display: flex;
         align-items: center;
-        gap: 0.25rem;
+        gap: 1rem;
         order: 2;
         margin-left: auto;
-
-        @include breakpoint(small) {
-            gap: 1rem;
-        }
 
         @include breakpoint(medium) {
             order: 3;
             margin-left: 0;
         }
 
-        // Contact Us: hidden on phones (it's in reach via the page content and footer).
-        .wp-block-buttons {
+        // Search and Favorites: desktop only (the mobile menu has its own search field and Favorites row).
+        .wp-block-crownspeakers-header-search,
+        .wp-block-crownspeakers-header-favorites {
             display: none;
 
-            @include breakpoint(small) {
-                display: flex;
+            @include breakpoint(medium) {
+                display: block;
             }
         }
 
+        // Contact Us: always visible; a slightly smaller pill on phones.
+        .wp-block-buttons {
+            display: flex;
+            flex-direction: row;
+        }
+
         .wp-block-button {
+            width: auto !important;
+
             .wp-element-button {
+                padding: 0.75rem 1.25rem;
                 background-color: var(--color-secondary);
                 color: var(--color-dark-gray);
                 white-space: nowrap;
+
+                @include breakpoint(small) {
+                    padding-inline: 1.75rem;
+                }
             }
         }
     }

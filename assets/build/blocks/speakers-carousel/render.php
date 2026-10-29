@@ -10,6 +10,22 @@ $autoplay = ! empty($attributes['autoplay']);
 // "Show tabs" (block settings). Off: Featured speakers only, no tab row.
 $show_tabs = $attributes['showTabs'] ?? true;
 
+// On a topic page (taxonomy-speaker_category template): "Popular {topic} speakers",
+// that topic's speakers with featured ones first, and no tabs.
+$topic_term = is_tax('speaker_category') ? get_queried_object() : null;
+$topic_term = $topic_term instanceof WP_Term ? $topic_term : null;
+
+// "View all speakers": the full list — on topic pages "View all {topic} speakers", filtered (?topic=slug).
+$view_all_url   = home_url('/all-speakers/');
+$view_all_label = 'View all speakers';
+
+if ($topic_term) {
+	$heading        = sprintf('Popular %s speakers', $topic_term->name);
+	$show_tabs      = false;
+	$view_all_url   = add_query_arg('topic', $topic_term->slug, $view_all_url);
+	$view_all_label = sprintf('View all %s speakers', $topic_term->name);
+}
+
 // Speakers per tab.
 $per_tab = 10;
 
@@ -26,6 +42,8 @@ $base_args = array(
 	'fields'              => 'ids',
 	'no_found_rows'       => true,
 	'ignore_sticky_posts' => true,
+	// Only speakers whose photo really exists (set, in the Media Library, file on the server).
+	'post__in'            => Speaker_Data::ids_with_photo(),
 );
 
 $visible_with_photo = array(
@@ -50,6 +68,31 @@ $tab_queries = array(
 		),
 	),
 );
+
+if ($topic_term) {
+	$tab_queries = array(
+		'featured' => array(
+			'label' => $topic_term->name,
+			'args'  => array(
+				'orderby'    => array(
+					Speaker_Data::FEATURED_ORDER_CLAUSE => 'DESC',
+					'menu_order'                        => 'ASC',
+				),
+				'meta_query' => array(
+					'relation' => 'AND',
+					$visible_with_photo,
+					Speaker_Data::featured_first_meta_query(),
+				),
+				'tax_query'  => array(
+					array(
+						'taxonomy' => 'speaker_category',
+						'terms'    => $topic_term->term_id,
+					),
+				),
+			),
+		),
+	);
+}
 
 if ($show_tabs && taxonomy_exists('speaker_category')) {
 	foreach ($topic_names as $topic_name) {
@@ -99,7 +142,9 @@ foreach ($tab_queries as $key => $tab) {
 }
 
 // Each speaker is output once, in admin order; the tabs filter them in view.js.
-asort($speaker_ids);
+if (! $topic_term) {
+	asort($speaker_ids);
+}
 $speaker_ids = array_keys($speaker_ids);
 $active_tab  = array_key_first($tabs);
 
@@ -121,7 +166,12 @@ ob_start();
 <?php
 $nav_markup = ob_get_clean();
 
-$wrapper_attributes = get_block_wrapper_attributes();
+// "Background" (block settings): none (white) or light gray.
+$background = in_array($attributes['background'] ?? 'none', array('none', 'light'), true) ? ($attributes['background'] ?? 'none') : 'none';
+
+$wrapper_attributes = get_block_wrapper_attributes(
+	array('class' => 'light' === $background ? 'has-light-background' : '')
+);
 ?>
 
 <section
@@ -135,10 +185,10 @@ $wrapper_attributes = get_block_wrapper_attributes();
 			</h2>
 
 			<?php if ($show_tabs) : ?>
-				<a class="speakers-carousel__view-all" href="/all-speakers/">View all speakers</a>
+				<a class="speakers-carousel__view-all" href="<?php echo esc_url($view_all_url); ?>"><?php echo esc_html($view_all_label); ?></a>
 			<?php else : ?>
 				<div class="speakers-carousel__actions">
-					<a class="speakers-carousel__view-all" href="/all-speakers/">View all speakers</a>
+					<a class="speakers-carousel__view-all" href="<?php echo esc_url($view_all_url); ?>"><?php echo esc_html($view_all_label); ?></a>
 					<?php echo $nav_markup; ?>
 				</div>
 			<?php endif; ?>

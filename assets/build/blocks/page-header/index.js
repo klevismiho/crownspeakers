@@ -44,6 +44,16 @@ module.exports = window["wp"]["blocks"];
 
 /***/ },
 
+/***/ "@wordpress/rich-text"
+/*!**********************************!*\
+  !*** external ["wp","richText"] ***!
+  \**********************************/
+(module) {
+
+module.exports = window["wp"]["richText"];
+
+/***/ },
+
 /***/ "./blocks/page-header/edit.js"
 /*!************************************!*\
   !*** ./blocks/page-header/edit.js ***!
@@ -85,7 +95,7 @@ function Edit({
         tagName: "h1",
         className: "page-header__title",
         value: title,
-        allowedFormats: ['core/italic'],
+        allowedFormats: ['core/italic', 'crownspeakers/highlight'],
         onChange: value => setAttributes({
           title: value
         }),
@@ -106,6 +116,51 @@ function Edit({
 
 /***/ },
 
+/***/ "./blocks/page-header/highlight-format.js"
+/*!************************************************!*\
+  !*** ./blocks/page-header/highlight-format.js ***!
+  \************************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   HIGHLIGHT_FORMAT: () => (/* binding */ HIGHLIGHT_FORMAT)
+/* harmony export */ });
+/* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/rich-text */ "@wordpress/rich-text");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/**
+ * "Highlight" text format: wraps the selected words in <span class="is-highlight">,
+ * which the theme shows in gold (e.g. the second line of a Page Header title).
+ *
+ * Registered once, here. Any block can offer it by adding 'crownspeakers/highlight'
+ * to a RichText's allowedFormats.
+ */
+
+
+
+const HIGHLIGHT_FORMAT = 'crownspeakers/highlight';
+const HighlightButton = ({
+  isActive,
+  value,
+  onChange
+}) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichTextToolbarButton, {
+  icon: "star-filled",
+  title: "Highlight (gold)",
+  isActive: isActive,
+  onClick: () => onChange((0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_0__.toggleFormat)(value, {
+    type: HIGHLIGHT_FORMAT
+  }))
+});
+(0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_0__.registerFormatType)(HIGHLIGHT_FORMAT, {
+  title: 'Highlight (gold)',
+  tagName: 'span',
+  className: 'is-highlight',
+  edit: HighlightButton
+});
+
+/***/ },
+
 /***/ "./blocks/page-header/index.js"
 /*!*************************************!*\
   !*** ./blocks/page-header/index.js ***!
@@ -115,17 +170,19 @@ function Edit({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./blocks/page-header/style.scss");
-/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./blocks/page-header/edit.js");
-/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./blocks/page-header/save.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./blocks/page-header/block.json");
+/* harmony import */ var _highlight_format_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./highlight-format.js */ "./blocks/page-header/highlight-format.js");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit.js */ "./blocks/page-header/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save.js */ "./blocks/page-header/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./blocks/page-header/block.json");
 
 
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
-  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
 /***/ },

@@ -228,13 +228,15 @@ class Speaker_Data {
 	const TYPE_TAXONOMY = 'speaker_type';
 
 	/**
-	 * Search filters read from the URL: `?topic=` (speaker_category slug) and `?type=` (TYPE_TAXONOMY slug).
-	 * Each one maps to its taxonomy.
+	 * Search filters read from the URL, each mapping to a taxonomy (term slug as value):
+	 * `?topic=`, `?type=`, `?fee=`, `?location=`. Filters whose taxonomy doesn't exist are ignored.
 	 */
 	public static function filters(): array {
 		return array(
-			'topic' => 'speaker_category',
-			'type'  => self::TYPE_TAXONOMY,
+			'topic'    => 'speaker_category',
+			'type'     => self::TYPE_TAXONOMY,
+			'fee'      => 'speaker_fee_ranges',
+			'location' => 'speaker_location',
 		);
 	}
 
@@ -258,6 +260,58 @@ class Speaker_Data {
 		);
 
 		return is_wp_error( $terms ) ? array() : $terms;
+	}
+
+	/**
+	 * Dropdown options for a filter: [ slug => label ] for every term with speakers, in tree order —
+	 * parents A–Z, each followed by its subcategories (A–Z, labels indented with "— ").
+	 * Parents without speakers of their own are kept when a subcategory has speakers.
+	 */
+	public static function filter_options( string $taxonomy ): array {
+		if ( ! taxonomy_exists( $taxonomy ) ) {
+			return array();
+		}
+
+		$terms = get_terms(
+			array(
+				'taxonomy'     => $taxonomy,
+				'hide_empty'   => true,
+				'hierarchical' => true,
+				'orderby'      => 'name',
+			)
+		);
+
+		if ( is_wp_error( $terms ) || ! $terms ) {
+			return array();
+		}
+
+		$children = array();
+
+		foreach ( $terms as $term ) {
+			$children[ (int) $term->parent ][] = $term;
+		}
+
+		// Terms whose parent isn't in the list (e.g. an empty parent) are shown at the top level.
+		$ids   = wp_list_pluck( $terms, 'term_id' );
+		$roots = array_filter( $terms, static fn( $term ) => ! in_array( (int) $term->parent, $ids, true ) );
+
+		$options = array();
+
+		$walk = static function ( array $branch, int $depth ) use ( &$walk, &$options, $children ) {
+			usort( $branch, static fn( $a, $b ) => strcasecmp( $a->name, $b->name ) );
+
+			foreach ( $branch as $term ) {
+				$options[ $term->slug ] = str_repeat( '— ', $depth ) . $term->name;
+
+				if ( ! empty( $children[ $term->term_id ] ) ) {
+					$walk( $children[ $term->term_id ], $depth + 1 );
+				}
+			}
+		};
+
+		$walk( array_values( $roots ), 0 );
+
+		return $options;
 	}
 
 	/**
@@ -331,6 +385,141 @@ class Speaker_Data {
 		return array(
 			'key'   => 'feature_speaker',
 			'value' => '1',
+		);
+	}
+
+	// Cache of speaker IDs whose photo really exists (see ids_with_photo()).
+	// Bump the suffix when the check changes, so an old cached list isn't reused.
+	const PHOTO_IDS_CACHE = 'cs_speakers_with_photo_v2';
+
+	// Image size shown by the speakers grid and carousels; its file must exist too.
+	const PHOTO_SIZE = 'medium_large';
+
+	/**
+	 * Clear the photo cache when speakers or media change. Called once from functions.php.
+	 */
+	public static function register_hooks(): void {
+		$flush = static function () {
+			delete_transient( self::PHOTO_IDS_CACHE );
+		};
+
+		add_action( 'save_post_speaker', $flush );
+		add_action( 'delete_attachment', $flush );
+		add_action( 'deleted_post', $flush );
+		add_action( 'updated_post_meta', static function ( $meta_id, $object_id, $meta_key ) use ( $flush ) {
+			if ( '_thumbnail_id' === $meta_key || '_wp_attached_file' === $meta_key ) {
+				$flush();
+			}
+		}, 10, 3 );
+		add_action( 'deleted_post_meta', static function ( $meta_ids, $object_id, $meta_key ) use ( $flush ) {
+			if ( '_thumbnail_id' === $meta_key ) {
+				$flush();
+			}
+		}, 10, 3 );
+	}
+
+	/**
+	 * IDs of published speakers whose featured image really exists: it's set, the media item
+	 * still exists, and both its original file and its PHOTO_SIZE version (the one the grid and
+	 * carousels load) are on the server. Cached for 6 hours (cleared by register_hooks()).
+	 *
+	 * Use as `'post__in' => Speaker_Data::ids_with_photo()` in speaker queries.
+	 *
+	 * @return int[] Never empty: returns [ 0 ] when no speaker qualifies, so post__in matches nothing.
+	 */
+	public static function ids_with_photo(): array {
+		$cached = get_transient( self::PHOTO_IDS_CACHE );
+
+		if ( is_array( $cached ) ) {
+			return $cached ? $cached : array( 0 );
+		}
+
+		$speaker_ids = get_posts(
+			array(
+				'post_type'      => 'speaker',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+				'meta_query'     => array(
+					array(
+						'key'     => '_thumbnail_id',
+						'value'   => 0,
+						'compare' => '>',
+						'type'    => 'NUMERIC',
+					),
+				),
+			)
+		);
+
+		// Load all speaker and attachment meta in a few queries instead of one per speaker.
+		update_meta_cache( 'post', $speaker_ids );
+
+		$thumbnails = array();
+
+		foreach ( $speaker_ids as $speaker_id ) {
+			$thumbnails[ $speaker_id ] = (int) get_post_meta( $speaker_id, '_thumbnail_id', true );
+		}
+
+		$attachment_ids = array_values( array_unique( array_filter( $thumbnails ) ) );
+
+		if ( $attachment_ids ) {
+			_prime_post_caches( $attachment_ids, false, true );
+		}
+
+		$valid = array();
+
+		foreach ( $thumbnails as $speaker_id => $attachment_id ) {
+			if ( ! $attachment_id || 'attachment' !== get_post_type( $attachment_id ) ) {
+				continue; // Media item deleted.
+			}
+
+			$file = get_attached_file( $attachment_id );
+
+			if ( ! $file || ! file_exists( $file ) ) {
+				continue; // Original file missing.
+			}
+
+			// The resized version the blocks display. Images smaller than that size have no resized
+			// file: WordPress serves the original, which was checked above.
+			$metadata = wp_get_attachment_metadata( $attachment_id );
+			$resized  = $metadata['sizes'][ self::PHOTO_SIZE ]['file'] ?? '';
+
+			if ( $resized && ! file_exists( path_join( dirname( $file ), $resized ) ) ) {
+				continue; // Resized file missing: its URL would 404.
+			}
+
+			$valid[] = (int) $speaker_id;
+		}
+
+		set_transient( self::PHOTO_IDS_CACHE, $valid, 6 * HOUR_IN_SECONDS );
+
+		return $valid ? $valid : array( 0 );
+	}
+
+	/**
+	 * Name of the meta_query clause to order by for "featured speakers first".
+	 */
+	const FEATURED_ORDER_CLAUSE = 'cs_featured';
+
+	/**
+	 * meta_query clause that keeps every speaker but lets a query sort featured ones first:
+	 * `'orderby' => array( Speaker_Data::FEATURED_ORDER_CLAUSE => 'DESC', 'menu_order' => 'ASC' )`.
+	 *
+	 * Ordering by a meta key normally drops posts that don't have it; "EXISTS or NOT EXISTS"
+	 * keeps them. Sorted DESC: '1' (featured), then '0', then speakers without the field.
+	 */
+	public static function featured_first_meta_query(): array {
+		return array(
+			'relation'                  => 'OR',
+			self::FEATURED_ORDER_CLAUSE => array(
+				'key'     => 'feature_speaker',
+				'compare' => 'EXISTS',
+			),
+			array(
+				'key'     => 'feature_speaker',
+				'compare' => 'NOT EXISTS',
+			),
 		);
 	}
 

@@ -1,0 +1,103 @@
+@use '../../assets/src/scss/mixins' as *;
+
+.wp-block-crownspeakers-our-story {
+	padding: 3rem 0;
+
+	@include breakpoint(small) {
+		padding-block: 4rem 5rem;
+	}
+
+	// Phones: eyebrow + image above the text. From `medium`: image left, text right (vertically centered).
+	.section-inner {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		align-items: center;
+		max-width: var(--wp--style--global--content-size);
+		margin: 0 auto;
+
+		@include breakpoint(medium) {
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+		}
+
+		@include breakpoint(large) {
+			grid-template-columns: 9fr 8fr;
+			gap: 7rem;
+		}
+	}
+
+	.our-story__eyebrow {
+		margin: 0 0 1.5rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 1rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: var(--color-dark-gray);
+
+		@include breakpoint(small) {
+			margin-bottom: 2rem;
+		}
+	}
+
+	.our-story__image {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		border-radius: 0.625rem;
+	}
+
+	// Lines the text up with the image, not with the eyebrow above it.
+	.our-story__content {
+		@include breakpoint(medium) {
+			padding-top: 3.5rem;
+		}
+	}
+
+	.our-story__title {
+		margin: 0 0 1.75rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-heading-font);
+		font-size: 2rem;
+		font-weight: 400;
+		line-height: 1.1;
+		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			font-size: 2.5rem;
+		}
+
+		@include breakpoint(large) {
+			font-size: 2.75rem;
+		}
+	}
+
+	.our-story__text {
+		font-size: 1.125rem;
+		line-height: 1.4;
+		color: #5b6675;
+
+		@include breakpoint(small) {
+			font-size: 1.25rem;
+		}
+
+		> * {
+			margin: 0 0 1.75rem;
+		}
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+
+		a {
+			color: var(--color-primary);
+			text-decoration: underline;
+		}
+
+		ul,
+		ol {
+			padding-left: 1.25rem;
+		}
+	}
+}

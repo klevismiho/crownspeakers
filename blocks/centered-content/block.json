@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/centered-content",
+	"version": "1.0.0",
+	"title": "Centered Content",
+	"category": "crownspeakers",
+	"icon": "align-center",
+	"description": "Centered heading with text underneath",
+	"example": {
+		"viewportWidth": 1200,
+		"attributes": {
+			"title": "Experience on<br>both sides of<br>the conversation."
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"attributes": {
+		"eyebrow": {
+			"type": "string",
+			"default": ""
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

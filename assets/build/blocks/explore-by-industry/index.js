@@ -58,11 +58,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 
 
-function Edit() {
+function Edit({
+  attributes,
+  setAttributes
+}) {
+  const {
+    heading
+  } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("section", {
     ...blockProps,
-    children: "Explore by industry edits here"
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "section-inner",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText, {
+        tagName: "h2",
+        className: "section-title",
+        value: heading,
+        allowedFormats: ['core/italic'],
+        onChange: value => setAttributes({
+          heading: value
+        }),
+        placeholder: "Title"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        children: "The topic cards are shown here on the website."
+      })]
+    })
   });
 }
 
@@ -114,7 +134,7 @@ function save() {
   \***********************************************/
 (module) {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"crownspeakers/explore-by-industry","version":"1.0.0","title":"Explore By Industry","category":"crownspeakers","icon":"building","description":"Carousel of industry cards","example":{"viewportWidth":1200},"supports":{"html":false,"align":["full"]},"textdomain":"crownspeakers","editorScript":"file:./index.js","style":"file:./style-index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"crownspeakers/explore-by-industry","version":"1.0.0","title":"Explore By Industry","category":"crownspeakers","icon":"building","description":"Carousel of industry cards","example":{"viewportWidth":1200},"supports":{"html":false,"align":["full"]},"attributes":{"heading":{"type":"string","default":"Explore by industry"}},"textdomain":"crownspeakers","editorScript":"file:./index.js","style":"file:./style-index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
 
 /***/ }
 

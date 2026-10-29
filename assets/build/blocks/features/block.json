@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "crownspeakers/features",
+  "version": "1.0.0",
+  "title": "Features",
+  "category": "crownspeakers",
+  "icon": "screenoptions",
+  "description": "Heading with a row of features, each with an icon, title and text",
+  "example": {
+    "viewportWidth": 1200
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Your event.<br>Your interests first."
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "icon": "heart",
+          "title": "Room to find the right fit.",
+          "text": "Crown represents talent equally, without an obligation to recommend one speaker over another."
+        },
+        {
+          "icon": "heart",
+          "title": "Advice with context.",
+          "text": "We consider your audience, your aims and your budget together, rather than starting with a name."
+        },
+        {
+          "icon": "heart",
+          "title": "Practical support.",
+          "text": "We help clarify availability, fees and event requirements so you know what to discuss before you book."
+        }
+      ],
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "textdomain": "crownspeakers",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

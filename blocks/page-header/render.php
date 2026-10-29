@@ -2,12 +2,25 @@
 
 $page_id = (int) ( $block->context['postId'] ?? get_the_ID() );
 
-$eyebrow = trim( wp_strip_all_tags( (string) ( $attributes['eyebrow'] ?? '' ) ) );
-
-// Title from the block, or the page's own title when left empty.
+$eyebrow  = trim( wp_strip_all_tags( (string) ( $attributes['eyebrow'] ?? '' ) ) );
 $title    = trim( (string) ( $attributes['title'] ?? '' ) );
-$title    = '' !== wp_strip_all_tags( $title ) ? $title : esc_html( get_the_title( $page_id ) );
 $subtitle = trim( (string) ( $attributes['subtitle'] ?? '' ) );
+
+// Empty title / paragraph fall back to the current page — or, on a category/topic archive
+// (e.g. templates/taxonomy-speaker_category.html), to the term's name and description.
+// Checked first: on archives the "current post" can be the first item in the list.
+$term = ( is_category() || is_tag() || is_tax() ) ? get_queried_object() : null;
+
+if ( '' === wp_strip_all_tags( $title ) ) {
+	$title = $term instanceof WP_Term ? esc_html( $term->name ) : esc_html( get_the_title( $page_id ) );
+}
+
+if ( '' === wp_strip_all_tags( $subtitle ) && $term instanceof WP_Term && '' !== trim( $term->description ) ) {
+	$subtitle = esc_html( wp_strip_all_tags( $term->description ) );
+}
+
+// Topic pages only: a "View all Topics" link back to the topics overview.
+$back_link = is_tax( 'speaker_category' ) ? home_url( '/topics/' ) : '';
 
 $wrapper_attributes = get_block_wrapper_attributes();
 ?>
@@ -29,6 +42,17 @@ $wrapper_attributes = get_block_wrapper_attributes();
 			<circle cx="290" cy="49" r="17" />
 		</g>
 	</svg>
+
+	<?php if ( $back_link ) : ?>
+		<div class="page-header__back-wrap">
+			<a class="page-header__back" href="<?php echo esc_url( $back_link ); ?>">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+					<path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+				</svg>
+				<span>View all Topics</span>
+			</a>
+		</div>
+	<?php endif; ?>
 
 	<div class="section-inner">
 		<?php if ( '' !== $eyebrow ) : ?>

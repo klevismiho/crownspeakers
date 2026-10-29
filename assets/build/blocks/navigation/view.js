@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const openItem = navigation.querySelector('.menu-item--mega.is-open');
         if (event.key === 'Escape' && openItem) {
           closeAllMega();
-          openItem.querySelector('a[data-mega-toggle]')?.focus();
+          openItem.querySelector('[data-mega-toggle]')?.focus();
         }
       });
       document.addEventListener('click', event => {

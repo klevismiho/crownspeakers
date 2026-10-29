@@ -36,7 +36,9 @@ $block_registry->register();
 
 new Block_Category();
 new Rest_Api();
+Speaker_Data::register_hooks();
 new Post_Type_Testimonial();
+new Post_Type_Team();
 
 new Performance();
 

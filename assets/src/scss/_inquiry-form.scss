@@ -1,14 +1,40 @@
 @use 'mixins' as *;
 
-// WPForms "Event Inquiry" form styling for dark backgrounds, shared by
-// `global-form` and the `favorites` popup.
+// WPForms "Event Inquiry" form styling, shared by `global-form`, `favorites` and `contact`.
+// `$theme`: 'dark' (white labels, for dark backgrounds — the default) or 'light' (dark labels,
+// for light backgrounds).
 // Fields with the CSS class `cs-half` (WPForms → field → Advanced → CSS Classes)
 // take one column from `small`; all other fields span the full width.
 //
 // Usage, on the element that wraps wpforms_display():
 //
 //   .my-form-wrapper { @include inquiry-form; }
-@mixin inquiry-form {
+//   .my-form-wrapper { @include inquiry-form('light'); }
+@mixin inquiry-form($theme: 'dark') {
+	// Dark background (default).
+	$label: rgba(255, 255, 255, 0.85);
+	$muted: rgba(255, 255, 255, 0.7);
+	$accent: var(--color-secondary);
+	$error: var(--color-secondary);
+	$submit-hover-bg: var(--color-white);
+	$submit-hover-color: null;
+	$message-border: rgba(255, 255, 255, 0.3);
+	$message-bg: rgba(255, 255, 255, 0.08);
+	$message-color: var(--color-white);
+
+	// Light background.
+	@if $theme == 'light' {
+		$label: var(--color-dark-gray);
+		$muted: #5b6675;
+		$accent: var(--color-primary);
+		$error: #b42318;
+		$submit-hover-bg: var(--color-primary);
+		$submit-hover-color: var(--color-white);
+		$message-border: #d6dae1;
+		$message-bg: var(--color-white);
+		$message-color: var(--color-dark-gray);
+	}
+
 	.wpforms-container {
 		margin: 0;
 	}
@@ -41,16 +67,16 @@
 			font-family: var(--wp--preset--font-family--crownspeakers-body-font);
 			font-size: 0.75rem;
 			font-weight: 400;
-			color: rgba(255, 255, 255, 0.85);
+			color: $label;
 		}
 
 		.wpforms-required-label {
-			color: var(--color-secondary);
+			color: $accent;
 		}
 
 		.wpforms-field-description {
 			font-size: 0.75rem;
-			color: rgba(255, 255, 255, 0.7);
+			color: $muted;
 		}
 
 		input[type="text"],
@@ -80,7 +106,7 @@
 
 			&:focus {
 				border-color: #d6dae1;
-				outline: 2px solid var(--color-secondary);
+				outline: 2px solid $accent;
 				outline-offset: 1px;
 				box-shadow: none;
 			}
@@ -91,19 +117,19 @@
 			resize: vertical;
 		}
 
-		// Validation errors, readable on the dark background.
+		// Validation errors.
 		label.wpforms-error,
 		em.wpforms-error {
 			margin-top: 0.375rem;
 			font-size: 0.75rem;
-			color: var(--color-secondary);
+			color: $error;
 		}
 
 		.wpforms-has-error input,
 		.wpforms-has-error textarea,
 		input.wpforms-error,
 		textarea.wpforms-error {
-			border-color: var(--color-secondary);
+			border-color: $error;
 		}
 
 		// Submit: gold pill, full width on phones, right-aligned from `small`.
@@ -136,7 +162,8 @@
 
 			&:hover,
 			&:focus {
-				background-color: var(--color-white);
+				background-color: $submit-hover-bg;
+				color: $submit-hover-color;
 			}
 
 			@include breakpoint(small) {
@@ -150,10 +177,10 @@
 	.wpforms-confirmation-container {
 		margin: 0;
 		padding: 1.5rem;
-		border: 1px solid rgba(255, 255, 255, 0.3);
+		border: 1px solid $message-border;
 		border-radius: 0.5rem;
-		background: rgba(255, 255, 255, 0.08);
-		color: var(--color-white);
+		background: $message-bg;
+		color: $message-color;
 
 		p {
 			margin: 0;

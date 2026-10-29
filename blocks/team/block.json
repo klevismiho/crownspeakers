@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/team",
+	"version": "1.0.0",
+	"title": "Team",
+	"category": "crownspeakers",
+	"icon": "groups",
+	"description": "Team members (Team post type) with photo, name, job title and bio",
+	"example": {
+		"viewportWidth": 1200
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": "Our team"
+		}
+	},
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

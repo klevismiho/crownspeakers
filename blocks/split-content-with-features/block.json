@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/split-content-with-features",
+	"version": "1.0.0",
+	"title": "Split Content With Features",
+	"category": "crownspeakers",
+	"icon": "columns",
+	"description": "Eyebrow, heading and text beside a list of features with icons",
+	"example": {
+		"viewportWidth": 1200
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"attributes": {
+		"eyebrow": {
+			"type": "string",
+			"default": "Why book with Crown?"
+		},
+		"title": {
+			"type": "string",
+			"default": "Someone in your corner.<br>From the start."
+		},
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"icon": "microphone",
+					"title": "Understanding your vision.",
+					"text": "We start with your audience, your aims and the goals of your event."
+				},
+				{
+					"icon": "dollar",
+					"title": "Consider the options.",
+					"text": "We help you weigh up relevant experience, speaking style and budget."
+				},
+				{
+					"icon": "checklist",
+					"title": "Work through the details.",
+					"text": "We confirm fee, availability, and any other requirements before you book."
+				}
+			],
+			"items": {
+				"type": "object"
+			}
+		}
+	},
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

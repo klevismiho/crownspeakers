@@ -11,6 +11,7 @@ import {
 	Button,
 	TextControl,
 	ToggleControl,
+	SelectControl,
 } from '@wordpress/components';
 
 import './editor.scss';
@@ -23,6 +24,7 @@ export default function Edit({ attributes, setAttributes }) {
 		logos,
 		autoplay,
 		showTabs,
+		background,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -93,6 +95,19 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) =>
 							setAttributes({ showTabs: value })
 						}
+					/>
+
+					<SelectControl
+						label="Background"
+						value={background}
+						options={[
+							{ label: 'None (white)', value: 'none' },
+							{ label: 'Light gray', value: 'light' },
+						]}
+						onChange={(value) =>
+							setAttributes({ background: value })
+						}
+						__nextHasNoMarginBottom
 					/>
 				</PanelBody>
 

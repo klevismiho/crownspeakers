@@ -6,18 +6,19 @@
 	// Static so the megamenu panel positions itself against the .site-header.
 	position: static;
 
-	// Hamburger; turns into a white round × while the panel is open.
+	// Hamburger: light round button with two dark lines; the lines turn into an × while the panel is open.
 	&__toggle {
 		display: flex;
 		flex-direction: column;
+		flex-shrink: 0;
 		align-items: center;
 		justify-content: center;
-		width: 2.75rem;
-		height: 2.75rem;
+		width: 3rem;
+		height: 3rem;
 		padding: 0;
 		border: 0;
 		border-radius: 50%;
-		background: none;
+		background-color: #eef1f4;
 		cursor: pointer;
 		transition: background-color 0.2s ease;
 
@@ -25,28 +26,31 @@
 			display: block;
 			width: 22px;
 			height: 2px;
-			margin: 3px 0;
-			background: var(--color-white);
-			transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+			margin: 4px 0;
+			border-radius: 1px;
+			background: var(--color-dark-gray);
+			transition: transform 0.2s ease;
 		}
 
+		// Two lines (the middle span isn't used).
+		span:nth-child(2) {
+			display: none;
+		}
+
+		&:hover {
+			background-color: var(--color-white);
+		}
+
+		// Lines are 10px apart (2px line + 2 × 4px margin), so each moves 5px to meet in the middle.
 		&[aria-expanded="true"] {
 			background-color: var(--color-white);
 
-			span {
-				background-color: var(--color-dark-gray);
-			}
-
 			span:nth-child(1) {
-				transform: translateY(8px) rotate(45deg);
-			}
-
-			span:nth-child(2) {
-				opacity: 0;
+				transform: translateY(5px) rotate(45deg);
 			}
 
 			span:nth-child(3) {
-				transform: translateY(-8px) rotate(-45deg);
+				transform: translateY(-5px) rotate(-45deg);
 			}
 		}
 
@@ -198,16 +202,6 @@
 		}
 	}
 
-	// Right-pointing chevron on mobile rows; hidden on desktop.
-	&__chevron {
-		flex-shrink: 0;
-		color: var(--color-dark-gray);
-
-		@include breakpoint(medium) {
-			display: none;
-		}
-	}
-
 	// Mobile: chevron pointing right, turning down when the item is open. Desktop: small down arrow.
 	&__submenu-toggle {
 		display: inline-flex;
@@ -252,6 +246,19 @@
 	&__menu .menu-item--mega {
 		position: static;
 
+		// Desktop with a mouse: open on hover; keyboard: open while focus is inside.
+		@include breakpoint(medium) {
+			@media (hover: hover) {
+				&:hover > .mega-menu {
+					display: block;
+				}
+			}
+
+			&:focus-within > .mega-menu {
+				display: block;
+			}
+		}
+
 		&.is-open > .mega-menu {
 			display: block;
 		}
@@ -274,6 +281,17 @@
 			padding: 2.125rem 1rem 4.5rem;
 			background-color: #eef1f4;
 			box-shadow: 0 1rem 2rem rgba(20, 35, 51, 0.15);
+
+			// Invisible bridge over the header's bottom padding (2rem, see _header.scss) between the
+			// menu item and the panel, so hover isn't lost on the way down.
+			&::before {
+				content: '';
+				position: absolute;
+				right: 0;
+				bottom: 100%;
+				left: 0;
+				height: 2rem;
+			}
 		}
 	}
 
@@ -507,18 +525,6 @@
 		background-color: #4b5b73;
 		color: var(--color-white);
 		text-align: center;
-	}
-
-	// Avatar peeking in from the right edge.
-	&__cta-avatar {
-		position: absolute;
-		top: 2.75rem;
-		right: -2.75rem;
-		width: auto;
-		height: 3.5rem;
-		padding: 0.25rem;
-		border-radius: 2rem 0 0 2rem;
-		background-color: var(--color-white);
 	}
 
 	&__cta-title {

@@ -25,6 +25,14 @@
       "type": "boolean",
       "default": true
     },
+    "background": {
+      "type": "string",
+      "default": "none",
+      "enum": [
+        "none",
+        "light"
+      ]
+    },
     "logos": {
       "type": "array",
       "default": [],

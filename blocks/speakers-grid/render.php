@@ -2,27 +2,62 @@
 
 use CS\Theme\Speaker_Data;
 
-$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
-$paged   = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
+$keyword  = isset( $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
+$paged    = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
+$selected = Speaker_Data::selected_filters();
+
+// Sort options (?sort=). "Relevance": featured speakers first, then best search matches, then admin order.
+$sort_options = array(
+	'relevance' => 'Relevance',
+	'name'      => 'Name A–Z',
+	'newest'    => 'Newest',
+);
+$sort         = isset( $_GET['sort'] ) ? sanitize_key( wp_unslash( $_GET['sort'] ) ) : 'relevance';
+$sort         = isset( $sort_options[ $sort ] ) ? $sort : 'relevance';
+
+switch ( $sort ) {
+	case 'name':
+		$orderby = array( 'title' => 'ASC' );
+		break;
+
+	case 'newest':
+		$orderby = array( 'date' => 'DESC' );
+		break;
+
+	default:
+		$orderby = array( Speaker_Data::FEATURED_ORDER_CLAUSE => 'DESC' );
+
+		if ( $keyword ) {
+			$orderby['relevance'] = 'DESC';
+		}
+
+		$orderby['menu_order'] = 'ASC';
+}
 
 $query_args = array(
 	'post_type'      => 'speaker',
 	'post_status'    => 'publish',
 	'posts_per_page' => 12,
 	'paged'          => $paged,
-	'orderby'        => 'menu_order',
-	'order'          => 'ASC',
-	'meta_query'     => Speaker_Data::visible_meta_query(),
+	// Only speakers whose photo really exists (set, in the Media Library, file on the server).
+	'post__in'       => Speaker_Data::ids_with_photo(),
+	'orderby'        => $orderby,
+	'meta_query'     => array(
+		'relation' => 'AND',
+		Speaker_Data::visible_meta_query(),
+		Speaker_Data::featured_first_meta_query(),
+	),
 );
 
 if ( $keyword ) {
 	$query_args['s'] = $keyword;
 }
 
-// Taxonomy filters: ?topic= / ?type= from the hero search, and the current topic on topic pages.
-$tax_query = Speaker_Data::filters_tax_query();
+// Taxonomy filters (?topic=, ?type=, ?fee=, ?location=), plus the current topic on topic pages.
+$on_topic_page = is_tax( 'speaker_category' );
+$tax_query     = Speaker_Data::filters_tax_query();
 
-if ( is_tax( 'speaker_category' ) ) {
+if ( $on_topic_page ) {
 	$tax_query[] = array(
 		'taxonomy' => 'speaker_category',
 		'terms'    => get_queried_object_id(),
@@ -35,30 +70,109 @@ if ( $tax_query ) {
 
 $speakers = new WP_Query( $query_args );
 
+// "Refine results" panel: one dropdown per filter whose taxonomy exists and has terms.
+// The topic dropdown is left out on topic pages (the page already is a topic).
+$filter_labels = array(
+	'topic'    => 'Topic',
+	'type'     => 'Speaker type',
+	'fee'      => 'Fee range',
+	'location' => 'Location',
+);
+$filter_fields = array();
+
+foreach ( Speaker_Data::filters() as $param => $taxonomy ) {
+	if ( 'topic' === $param && $on_topic_page ) {
+		continue;
+	}
+
+	// Every term with speakers, subcategories indented under their parent.
+	$options = Speaker_Data::filter_options( $taxonomy );
+
+	if ( $options ) {
+		$filter_fields[ $param ] = array(
+			'label'   => $filter_labels[ $param ] ?? ucfirst( $param ),
+			'options' => $options,
+		);
+	}
+}
+
+// The form submits to this page (page 1): the listing page, or the topic page.
+$base_url = $on_topic_page ? get_term_link( get_queried_object() ) : get_permalink();
+$base_url = is_wp_error( $base_url ) || ! $base_url ? home_url( '/all-speakers/' ) : $base_url;
+
+$active_filters = count( array_intersect_key( $selected, $filter_fields ) ) + ( $keyword ? 1 : 0 );
+$total          = (int) $speakers->found_posts;
+$panel_id       = wp_unique_id( 'speakers-grid-filters-' );
+$field_id       = wp_unique_id( 'speakers-grid-' );
+
 $wrapper_attributes = get_block_wrapper_attributes();
 ?>
 
 <section <?php echo $wrapper_attributes; ?>>
 
-	<div class="speakers-grid__toolbar">
+	<form class="speakers-grid__toolbar" action="<?php echo esc_url( $base_url ); ?>" method="get" role="search" aria-label="Filter and sort speakers">
 		<div class="section-inner">
-			<button type="button" class="speakers-grid__refine">
-				Refine results
-				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-					<path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-				</svg>
-			</button>
+			<div class="speakers-grid__toolbar-start">
+				<button type="button" class="speakers-grid__refine" aria-expanded="false" aria-controls="<?php echo esc_attr( $panel_id ); ?>">
+					<span>
+						Refine results
+						<?php if ( $active_filters ) : ?>
+							<span class="speakers-grid__refine-count">(<?php echo esc_html( $active_filters ); ?>)</span>
+						<?php endif; ?>
+					</span>
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+					</svg>
+				</button>
+
+				<p class="speakers-grid__total" aria-live="polite">
+					<?php echo esc_html( sprintf( _n( '%s speaker', '%s speakers', $total, 'crownspeakers' ), number_format_i18n( $total ) ) ); ?>
+				</p>
+			</div>
 
 			<div class="speakers-grid__sort">
-				<label for="speakers-grid-sort">Sort by</label>
-				<select id="speakers-grid-sort" name="sort">
-					<option value="relevance">Relevance</option>
-					<option value="name">Name A–Z</option>
-					<option value="newest">Newest</option>
+				<label for="<?php echo esc_attr( $field_id ); ?>-sort">Sort by</label>
+				<select id="<?php echo esc_attr( $field_id ); ?>-sort" name="sort" data-auto-submit>
+					<?php foreach ( $sort_options as $value => $label ) : ?>
+						<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $sort, $value ); ?>><?php echo esc_html( $label ); ?></option>
+					<?php endforeach; ?>
 				</select>
+				<noscript><button type="submit" class="speakers-grid__sort-submit">Sort</button></noscript>
 			</div>
 		</div>
-	</div>
+
+		<div class="speakers-grid__panel" id="<?php echo esc_attr( $panel_id ); ?>" hidden>
+			<div class="section-inner">
+				<div class="speakers-grid__fields">
+					<div class="speakers-grid__field">
+						<label for="<?php echo esc_attr( $field_id ); ?>-keyword">Keyword</label>
+						<input type="search" id="<?php echo esc_attr( $field_id ); ?>-keyword" name="keyword" value="<?php echo esc_attr( $keyword ); ?>" placeholder="Name, keyword or topic" />
+					</div>
+
+					<?php foreach ( $filter_fields as $param => $field ) : ?>
+						<div class="speakers-grid__field">
+							<label for="<?php echo esc_attr( $field_id . '-' . $param ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
+							<select id="<?php echo esc_attr( $field_id . '-' . $param ); ?>" name="<?php echo esc_attr( $param ); ?>">
+								<option value="">All</option>
+								<?php foreach ( $field['options'] as $slug => $label ) : ?>
+									<option value="<?php echo esc_attr( $slug ); ?>" <?php selected( $selected[ $param ] ?? '', $slug ); ?>>
+										<?php echo esc_html( $label ); ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					<?php endforeach; ?>
+				</div>
+
+				<div class="speakers-grid__panel-actions">
+					<button type="submit" class="speakers-grid__apply">Apply filters</button>
+					<?php if ( $active_filters ) : ?>
+						<a class="speakers-grid__clear" href="<?php echo esc_url( $base_url ); ?>">Clear all</a>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</form>
 
 	<div class="section-inner">
 
@@ -163,7 +277,12 @@ $wrapper_attributes = get_block_wrapper_attributes();
 			<?php endif; ?>
 
 		<?php else : ?>
-			<p class="speakers-grid__empty">No speakers found<?php echo $keyword ? ' for “' . esc_html( $keyword ) . '”' : ''; ?>.</p>
+			<div class="speakers-grid__empty">
+				<p>No speakers found<?php echo $keyword ? ' for “' . esc_html( $keyword ) . '”' : ''; ?><?php echo $active_filters ? ' with these filters' : ''; ?>.</p>
+				<?php if ( $active_filters ) : ?>
+					<a class="speakers-grid__clear" href="<?php echo esc_url( $base_url ); ?>">Clear all filters</a>
+				<?php endif; ?>
+			</div>
 		<?php endif; ?>
 
 	</div>

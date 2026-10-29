@@ -1,0 +1,84 @@
+@use '../../assets/src/scss/mixins' as *;
+
+.wp-block-crownspeakers-split-content {
+	padding: 3rem 0;
+
+	@include breakpoint(small) {
+		padding-block: 5rem 6rem;
+	}
+
+	// Phones: heading above the text. From `medium`: heading left, text right.
+	.section-inner {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		max-width: var(--wp--style--global--content-size);
+		margin: 0 auto;
+
+		@include breakpoint(medium) {
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+		}
+	}
+
+	.split-content__eyebrow {
+		margin: 0 0 1.5rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 1rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: var(--color-dark-gray);
+
+		@include breakpoint(small) {
+			margin-bottom: 2.25rem;
+		}
+	}
+
+	.split-content__title {
+		margin: 0;
+		font-family: var(--wp--preset--font-family--crownspeakers-heading-font);
+		font-size: 2.25rem;
+		font-weight: 400;
+		line-height: 1.05;
+		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			font-size: 3rem;
+		}
+
+		@include breakpoint(large) {
+			font-size: 3.5rem;
+		}
+	}
+
+	// Right column: lines up with the title (below the eyebrow) on desktop.
+	.split-content__text {
+		max-width: 43rem;
+		font-size: 1.125rem;
+		line-height: 1.4;
+		color: #5b6675;
+
+		@include breakpoint(medium) {
+			padding-top: 3rem;
+			font-size: 1.25rem;
+		}
+
+		> * {
+			margin: 0 0 1.75rem;
+		}
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+
+		a {
+			color: var(--color-primary);
+			text-decoration: underline;
+		}
+
+		ul,
+		ol {
+			padding-left: 1.25rem;
+		}
+	}
+}

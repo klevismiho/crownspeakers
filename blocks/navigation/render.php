@@ -32,7 +32,6 @@ $phone_href   = 'tel:+18778825368';
 $nav_panel_id = wp_unique_id('navigation-panel-');
 $search_id    = wp_unique_id('navigation-search-');
 
-$chevron = '<svg class="wp-block-crownspeakers-navigation__chevron" width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="m1 1 6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>';
 
 ?>
 
@@ -92,9 +91,9 @@ $chevron = '<svg class="wp-block-crownspeakers-navigation__chevron" width="8" he
 
 			<li class="menu-item <?php echo ($has_children || $is_mega) ? 'menu-item-has-children' : ''; ?> <?php echo $is_mega ? 'menu-item--mega' : ''; ?> <?php echo esc_attr(implode(' ', $item_classes)); ?>">
 
-				<a href="<?php echo esc_url($item->url); ?>" <?php echo $is_mega ? 'data-mega-toggle aria-expanded="false" aria-controls="' . esc_attr($panel_id) . '"' : ''; ?>>
+				<?php // The megamenu item links to /topics/; the panel opens on hover (desktop) or via the chevron button. ?>
+				<a href="<?php echo esc_url($is_mega ? home_url('/topics/') : $item->url); ?>">
 					<?php echo esc_html($item->title); ?>
-					<?php echo ($has_children || $is_mega) ? '' : $chevron; ?>
 				</a>
 
 
@@ -103,8 +102,8 @@ $chevron = '<svg class="wp-block-crownspeakers-navigation__chevron" width="8" he
 					<button
 						class="wp-block-crownspeakers-navigation__submenu-toggle"
 						aria-expanded="false"
-						<?php echo $is_mega ? 'data-mega-toggle aria-controls="' . esc_attr($panel_id) . '" tabindex="-1"' : ''; ?>
-						aria-label="Toggle submenu">
+						<?php echo $is_mega ? 'data-mega-toggle aria-controls="' . esc_attr($panel_id) . '"' : ''; ?>
+						aria-label="<?php echo esc_attr($is_mega ? 'Show ' . wp_strip_all_tags($item->title) : 'Toggle submenu'); ?>">
 
 						<svg width="12" height="8" viewBox="0 0 12 8" fill="none">
 							<path
@@ -184,13 +183,11 @@ $chevron = '<svg class="wp-block-crownspeakers-navigation__chevron" width="8" he
 						Favorites
 						<span class="wp-block-crownspeakers-navigation__badge" data-favorites-count>0</span>
 					</span>
-					<?php echo $chevron; ?>
 				</a>
 			</li>
 			<li>
 				<a class="wp-block-crownspeakers-navigation__row" href="<?php echo esc_url($contact_url); ?>">
 					<span>Contact Us</span>
-					<?php echo $chevron; ?>
 				</a>
 			</li>
 		</ul>
@@ -205,7 +202,6 @@ $chevron = '<svg class="wp-block-crownspeakers-navigation__chevron" width="8" he
 		</form>
 
 		<div class="wp-block-crownspeakers-navigation__cta">
-			<img class="wp-block-crownspeakers-navigation__cta-avatar" src="<?php echo esc_url(get_template_directory_uri() . '/assets/src/images/member-1.svg'); ?>" alt="" />
 
 			<p class="wp-block-crownspeakers-navigation__cta-title">Let’s make your event <span>unforgettable.</span></p>
 

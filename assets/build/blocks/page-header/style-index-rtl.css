@@ -53,8 +53,49 @@
   max-width: 54rem;
   margin: 0 auto;
 }
+.wp-block-crownspeakers-page-header .page-header__back-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--style--global--content-size);
+  margin: -1.5rem auto 2.5rem;
+  text-align: right;
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-page-header .page-header__back-wrap {
+    margin-top: -2.5rem;
+    margin-bottom: 3rem;
+  }
+}
+.wp-block-crownspeakers-page-header .page-header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+  font-size: 1rem;
+  color: var(--color-white);
+  text-decoration: none;
+}
+.wp-block-crownspeakers-page-header .page-header__back svg {
+  flex-shrink: 0;
+  color: var(--color-secondary);
+  transition: transform 0.2s ease;
+}
+.wp-block-crownspeakers-page-header .page-header__back span {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+.wp-block-crownspeakers-page-header .page-header__back:hover span {
+  text-decoration: none;
+}
+.wp-block-crownspeakers-page-header .page-header__back:hover svg {
+  transform: translateX(3px);
+}
+.wp-block-crownspeakers-page-header .page-header__back:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 4px;
+}
 .wp-block-crownspeakers-page-header .page-header__eyebrow {
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
   font-family: var(--wp--preset--font-family--crownspeakers-body-font);
   font-size: 0.875rem;
   font-weight: 500;
@@ -62,10 +103,28 @@
   text-transform: uppercase;
   color: var(--color-white);
 }
+.wp-block-crownspeakers-page-header .page-header__eyebrow::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 1px;
+  margin: 1rem auto 0;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+@media (min-width: 800px) {
+  .wp-block-crownspeakers-page-header .page-header__eyebrow::after {
+    width: 5.375rem;
+    margin-top: 1.25rem;
+  }
+}
 @media (min-width: 800px) {
   .wp-block-crownspeakers-page-header .page-header__eyebrow {
+    margin-bottom: 1.75rem;
     font-size: 1.125rem;
   }
+}
+.wp-block-crownspeakers-page-header .page-header__title .is-highlight {
+  color: var(--color-secondary);
 }
 .wp-block-crownspeakers-page-header .page-header__title {
   max-width: 46rem;

@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "crownspeakers/our-story",
+	"version": "1.0.0",
+	"title": "Our Story",
+	"category": "crownspeakers",
+	"icon": "format-image",
+	"description": "Eyebrow and image beside a heading and text",
+	"example": {
+		"viewportWidth": 1200
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"attributes": {
+		"eyebrow": {
+			"type": "string",
+			"default": "Our story"
+		},
+		"title": {
+			"type": "string",
+			"default": "Crown began in 2004 with the simple priority of the person responsible for a successful event."
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "crownspeakers",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

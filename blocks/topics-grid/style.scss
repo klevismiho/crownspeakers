@@ -28,18 +28,14 @@
 		color: #5b6675;
 	}
 
-	// 1 column on small phones → 5 on wide screens.
+	// Two compact columns on phones, then 3 → 4 → 5 regular cards.
 	.topics-grid__list {
 		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1rem;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.75rem;
 		margin: 0;
 		padding: 0;
 		list-style: none;
-
-		@media (min-width: 480px) {
-			grid-template-columns: repeat(2, 1fr);
-		}
 
 		@include breakpoint(small) {
 			grid-template-columns: repeat(3, 1fr);
@@ -65,5 +61,36 @@
 
 	.topics-grid__card {
 		width: 100%;
+	}
+
+	// Phones: smaller cards so two fit side by side. (Phone-only override of the shared
+	// topic-card() sizes, so the regular sizes don't have to be repeated from `small` up.)
+	@include breakpoint-down(small) {
+		.topics-grid__card {
+			min-height: 11rem;
+			padding: 1.25rem 0.75rem 1rem;
+		}
+
+		.topics-grid__icon {
+			width: 3.25rem;
+			height: 3.25rem;
+
+			svg {
+				width: 1.25rem;
+				height: 1.25rem;
+			}
+		}
+
+		.topics-grid__title {
+			margin: 0.875rem 0 1rem;
+			font-size: 1rem;
+			hyphens: auto;
+			overflow-wrap: anywhere;
+		}
+
+		.topics-grid__link {
+			width: 2.25rem;
+			height: 2.25rem;
+		}
 	}
 }

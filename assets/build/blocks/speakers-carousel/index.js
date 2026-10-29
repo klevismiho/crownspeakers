@@ -94,7 +94,8 @@ function Edit({
     buttonUrl,
     logos,
     autoplay,
-    showTabs
+    showTabs,
+    background
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)();
   const updateLogo = (index, field, value) => {
@@ -149,6 +150,20 @@ function Edit({
           onChange: value => setAttributes({
             showTabs: value
           })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+          label: "Background",
+          value: background,
+          options: [{
+            label: 'None (white)',
+            value: 'none'
+          }, {
+            label: 'Light gray',
+            value: 'light'
+          }],
+          onChange: value => setAttributes({
+            background: value
+          }),
+          __nextHasNoMarginBottom: true
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
         title: "Logos",
@@ -349,7 +364,7 @@ function save() {
   \*********************************************/
 (module) {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"crownspeakers/speakers-carousel","version":"1.0.0","title":"Speakers Carousel","category":"crownspeakers","icon":"grid-view","description":"Speakers Carousel","example":{"viewportWidth":1200},"supports":{"html":false,"align":["full"]},"attributes":{"autoplay":{"type":"boolean","default":false},"showTabs":{"type":"boolean","default":true},"logos":{"type":"array","default":[],"items":{"type":"object"}}},"textdomain":"crownspeakers","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"crownspeakers/speakers-carousel","version":"1.0.0","title":"Speakers Carousel","category":"crownspeakers","icon":"grid-view","description":"Speakers Carousel","example":{"viewportWidth":1200},"supports":{"html":false,"align":["full"]},"attributes":{"autoplay":{"type":"boolean","default":false},"showTabs":{"type":"boolean","default":true},"background":{"type":"string","default":"none","enum":["none","light"]},"logos":{"type":"array","default":[],"items":{"type":"object"}}},"textdomain":"crownspeakers","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
 
 /***/ }
 

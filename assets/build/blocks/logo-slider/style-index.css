@@ -53,11 +53,13 @@
   margin-top: 0;
   font-size: 1.25rem;
   color: var(--color-primary);
+  text-align: center;
 }
 @media (min-width: 800px) {
   .wp-block-crownspeakers-logo-slider .section-title {
     flex-shrink: 0;
     width: 25%;
+    text-align: left;
   }
 }
 .wp-block-crownspeakers-logo-slider {

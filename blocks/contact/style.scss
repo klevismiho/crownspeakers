@@ -1,0 +1,164 @@
+@use '../../assets/src/scss/mixins' as *;
+@use '../../assets/src/scss/inquiry-form' as *;
+
+.wp-block-crownspeakers-contact {
+	padding: 2.5rem 0 4rem;
+
+	@include breakpoint(small) {
+		padding-block: 3.5rem 5rem;
+	}
+
+	// Phones: details above the form. From `medium`: side by side.
+	.section-inner {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		max-width: var(--wp--style--global--content-size);
+		margin: 0 auto;
+
+		@include breakpoint(medium) {
+			grid-template-columns: 5fr 9fr;
+			gap: 4rem;
+		}
+	}
+
+	// Left column.
+	.contact__details {
+		max-width: 30rem;
+	}
+
+	.contact__title {
+		margin: 0 0 1.5rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-heading-font);
+		font-size: 2.75rem;
+		font-weight: 400;
+		line-height: 1;
+		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			font-size: 4rem;
+		}
+	}
+
+	.contact__intro {
+		margin: 0 0 2rem;
+		font-size: 1.125rem;
+		line-height: 1.4;
+		color: #5b6675;
+
+		@include breakpoint(small) {
+			font-size: 1.25rem;
+		}
+	}
+
+	// Phone and email as outlined pills, stacked.
+	.contact__links {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+		margin: 0 0 3rem;
+		padding: 0;
+		list-style: none;
+
+		@include breakpoint(small) {
+			margin-bottom: 4.5rem;
+		}
+	}
+
+	.contact__link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.75rem 1.75rem 0.75rem 1.5rem;
+		border: 1px solid #c8ced6;
+		border-radius: 999px;
+		font-size: 1rem;
+		color: var(--color-dark-gray);
+		text-decoration: none;
+		transition: border-color 0.2s ease;
+
+		@include breakpoint(small) {
+			font-size: 1.125rem;
+		}
+
+		svg {
+			flex-shrink: 0;
+			color: var(--color-secondary);
+		}
+
+		&:hover {
+			border-color: var(--color-primary);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--color-secondary);
+			outline-offset: 2px;
+		}
+	}
+
+	.contact__office {
+		max-width: 26rem;
+	}
+
+	.contact__eyebrow {
+		margin: 0;
+		padding-bottom: 1.25rem;
+		border-bottom: 1px solid #e5e7eb;
+		font-family: var(--wp--preset--font-family--crownspeakers-body-font);
+		font-size: 1rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: var(--color-dark-gray);
+	}
+
+	.contact__address,
+	.contact__hours {
+		margin: 1.75rem 0 0;
+		font-size: 1.125rem;
+		font-style: normal;
+		line-height: 1.4;
+		color: #5b6675;
+
+		@include breakpoint(small) {
+			font-size: 1.25rem;
+		}
+	}
+
+	// Right column: light gray panel with the inquiry form.
+	.contact__form {
+		padding: 2rem 1.25rem;
+		border-radius: 0.75rem;
+		background-color: #e5e8ee;
+		color: var(--color-dark-gray);
+
+		@include breakpoint(small) {
+			padding: 3.5rem 2.25rem 2.5rem;
+		}
+
+		@include inquiry-form('light');
+	}
+
+	.contact__form-title {
+		margin: 0 0 1.75rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-heading-font);
+		font-size: 1.75rem;
+		font-weight: 400;
+		line-height: 1.1;
+		color: var(--color-dark-gray);
+
+		@include breakpoint(small) {
+			font-size: 2.25rem;
+		}
+	}
+
+	.contact__form-fallback {
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.5;
+
+		a {
+			color: var(--color-primary);
+		}
+	}
+}

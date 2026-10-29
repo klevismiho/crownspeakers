@@ -1,6 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 
 import './style.scss';
+import './highlight-format.js';
 
 import Edit from './edit.js';
 import save from './save.js';

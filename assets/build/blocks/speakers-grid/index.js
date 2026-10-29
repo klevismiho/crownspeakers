@@ -114,7 +114,7 @@ function save() {
   \*****************************************/
 (module) {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"crownspeakers/speakers-grid","version":"1.0.0","title":"Speakers Grid","category":"crownspeakers","icon":"grid-view","description":"Grid of speakers with toolbar and pagination","example":{"viewportWidth":1200},"supports":{"html":false,"align":["full"]},"textdomain":"crownspeakers","editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"crownspeakers/speakers-grid","version":"1.0.0","title":"Speakers Grid","category":"crownspeakers","icon":"grid-view","description":"Grid of speakers with toolbar and pagination","example":{"viewportWidth":1200},"supports":{"html":false,"align":["full"]},"textdomain":"crownspeakers","editorScript":"file:./index.js","style":"file:./style-index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
 
 /***/ }
 

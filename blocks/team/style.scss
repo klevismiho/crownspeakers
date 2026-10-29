@@ -1,0 +1,149 @@
+@use '../../assets/src/scss/mixins' as *;
+
+.wp-block-crownspeakers-team {
+	padding: 3rem 0;
+
+	@include breakpoint(small) {
+		padding-block: 4rem 5rem;
+	}
+
+	.section-inner {
+		max-width: var(--wp--style--global--content-size);
+		margin: 0 auto;
+	}
+
+	.team__title {
+		margin: 0 0 2rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-heading-font);
+		font-size: 2.25rem;
+		font-weight: 400;
+		line-height: 1.1;
+		color: var(--color-primary);
+
+		@include breakpoint(small) {
+			margin-bottom: 2.5rem;
+			font-size: 3rem;
+		}
+	}
+
+	// One column on phones, two from `medium`.
+	.team__list {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		@include breakpoint(medium) {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2.25rem 3.5rem;
+		}
+	}
+
+	// Photo on the left, details on the right.
+	.team__member {
+		display: grid;
+		grid-template-columns: 7.5rem 1fr;
+		gap: 1.25rem;
+		align-items: start;
+
+		@include breakpoint(small) {
+			grid-template-columns: 12.75rem 1fr;
+			gap: 2.5rem;
+		}
+	}
+
+	// Gray square until a photo is set.
+	.team__photo {
+		aspect-ratio: 205 / 201;
+		overflow: hidden;
+		background-color: #d9d9d9;
+	}
+
+	.team__image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.team__details {
+		@include breakpoint(small) {
+			padding-top: 0.5rem;
+		}
+	}
+
+	.team__name {
+		margin: 0 0 0.75rem;
+		font-family: var(--wp--preset--font-family--crownspeakers-heading-font);
+		font-size: 1.5rem;
+		font-weight: 400;
+		line-height: 1.15;
+		color: var(--color-dark-gray);
+
+		@include breakpoint(small) {
+			margin-bottom: 1rem;
+			font-size: 2rem;
+		}
+	}
+
+	.team__role {
+		margin: 0 0 1rem;
+		font-size: 0.875rem;
+		color: #5b6675;
+
+		@include breakpoint(small) {
+			margin-bottom: 1.25rem;
+		}
+	}
+
+	.team__bio {
+		font-size: 1rem;
+		line-height: 1.35;
+		color: #5b6675;
+
+		@include breakpoint(small) {
+			font-size: 1.0625rem;
+		}
+
+		p {
+			margin: 0 0 1rem;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		a {
+			color: var(--color-primary);
+			text-decoration: underline;
+		}
+	}
+
+	.team__linkedin {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-top: 1rem;
+		font-size: 0.875rem;
+		color: var(--color-primary);
+		text-decoration: none;
+
+		span:not(.screen-reader-text) {
+			text-decoration: underline;
+			text-underline-offset: 0.2em;
+		}
+
+		&:hover span:not(.screen-reader-text) {
+			text-decoration: none;
+		}
+	}
+
+	// Editor only: the members are rendered on the website.
+	.team__editor-note {
+		margin: 0;
+		font-size: 0.875rem;
+		color: #5b6675;
+	}
+}

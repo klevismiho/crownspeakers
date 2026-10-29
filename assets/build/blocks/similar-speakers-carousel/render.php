@@ -22,6 +22,15 @@ $base_args = array(
 	),
 );
 
+// Only speakers whose photo really exists, minus the given IDs. (WordPress ignores post__not_in
+// when post__in is set, so excluded speakers are removed from the list here.)
+$photo_ids        = \CS\Theme\Speaker_Data::ids_with_photo();
+$photo_ids_except = static function ( array $exclude ) use ( $photo_ids ) {
+	$ids = array_values( array_diff( $photo_ids, array_map( 'intval', $exclude ) ) );
+
+	return $ids ? $ids : array( 0 );
+};
+
 // First: speakers sharing a category with the current speaker.
 $category_ids = $current_id ? wp_get_post_terms( $current_id, 'speaker_category', array( 'fields' => 'ids' ) ) : array();
 $speaker_ids  = array();
@@ -30,7 +39,7 @@ if ( ! empty( $category_ids ) && ! is_wp_error( $category_ids ) ) {
 	$speaker_ids = get_posts(
 		$base_args + array(
 			'posts_per_page' => $limit,
-			'post__not_in'   => array( $current_id ),
+			'post__in'       => $photo_ids_except( array( $current_id ) ),
 			'tax_query'      => array(
 				array(
 					'taxonomy' => 'speaker_category',
@@ -48,7 +57,7 @@ if ( count( $speaker_ids ) < $limit ) {
 		get_posts(
 			$base_args + array(
 				'posts_per_page' => $limit - count( $speaker_ids ),
-				'post__not_in'   => array_merge( array( $current_id ), $speaker_ids ),
+				'post__in'       => $photo_ids_except( array_merge( array( $current_id ), $speaker_ids ) ),
 			)
 		)
 	);

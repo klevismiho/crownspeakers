@@ -35,6 +35,12 @@
 .wp-block-crownspeakers-speakers-carousel {
   padding: 4rem 0;
 }
+.wp-block-crownspeakers-speakers-carousel.has-light-background {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-inline: 1rem;
+  background-color: #e5e8ee;
+}
 .wp-block-crownspeakers-speakers-carousel .section-inner {
   max-width: var(--wp--style--global--content-size);
   margin: 0 auto;

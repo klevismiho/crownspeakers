@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				if (event.key === 'Escape' && openItem) {
 					closeAllMega();
-					openItem.querySelector('a[data-mega-toggle]')?.focus();
+					openItem.querySelector('[data-mega-toggle]')?.focus();
 				}
 			});
 

@@ -9,6 +9,11 @@ $pinned_slugs = array(
 	// 'healthcare',
 );
 
+$heading = trim((string) ($attributes['heading'] ?? 'Explore by industry'));
+
+// On a topic page, leave out the topic being viewed ("Other interesting topics").
+$exclude = is_tax('speaker_category') ? array(get_queried_object_id()) : array();
+
 $terms = array();
 
 if (taxonomy_exists('speaker_category')) {
@@ -19,6 +24,7 @@ if (taxonomy_exists('speaker_category')) {
 				'slug'       => $pinned_slugs,
 				'orderby'    => 'slug__in',
 				'hide_empty' => false,
+				'exclude'    => $exclude,
 			)
 		)
 		: get_terms(
@@ -28,6 +34,7 @@ if (taxonomy_exists('speaker_category')) {
 				'order'      => 'DESC',
 				'hide_empty' => true,
 				'number'     => $limit,
+				'exclude'    => $exclude,
 			)
 		);
 }
@@ -53,7 +60,7 @@ $wrapper_attributes = get_block_wrapper_attributes();
 	<div class="section-inner">
 
 		<div class="section-header">
-			<h2 class="section-title">Explore by industry</h2>
+			<h2 class="section-title"><?php echo wp_kses_post($heading); ?></h2>
 
 			<div class="explore-by-industry__nav">
 				<button type="button" class="explore-by-industry__arrow explore-by-industry__arrow--prev" aria-label="Previous industries">

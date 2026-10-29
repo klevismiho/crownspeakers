@@ -6,8 +6,9 @@ use CS\Theme\Speaker_Data;
 $search_url = home_url('/all-speakers/');
 $selected   = Speaker_Data::selected_filters();
 $keyword    = isset($_GET['keyword']) ? sanitize_text_field(wp_unslash($_GET['keyword'])) : '';
-$topics     = Speaker_Data::filter_terms('speaker_category');
-$types      = Speaker_Data::filter_terms(Speaker_Data::TYPE_TAXONOMY);
+// Every term with speakers, subcategories indented under their parent.
+$topics     = Speaker_Data::filter_options('speaker_category');
+$types      = Speaker_Data::filter_options(Speaker_Data::TYPE_TAXONOMY);
 
 $wrapper_attributes = get_block_wrapper_attributes();
 ?>
@@ -48,9 +49,9 @@ $wrapper_attributes = get_block_wrapper_attributes();
       <label for="speaker-topic" class="screen-reader-text">Topic</label>
       <select id="speaker-topic" name="topic">
         <option value="">All topics</option>
-        <?php foreach ($topics as $topic) : ?>
-          <option value="<?php echo esc_attr($topic->slug); ?>" <?php selected($selected['topic'] ?? '', $topic->slug); ?>>
-            <?php echo esc_html($topic->name); ?>
+        <?php foreach ($topics as $slug => $label) : ?>
+          <option value="<?php echo esc_attr($slug); ?>" <?php selected($selected['topic'] ?? '', $slug); ?>>
+            <?php echo esc_html($label); ?>
           </option>
         <?php endforeach; ?>
       </select>
@@ -62,9 +63,9 @@ $wrapper_attributes = get_block_wrapper_attributes();
         <label for="speaker-type" class="screen-reader-text">Speaker type</label>
         <select id="speaker-type" name="type">
           <option value="">All speaker types</option>
-          <?php foreach ($types as $type) : ?>
-            <option value="<?php echo esc_attr($type->slug); ?>" <?php selected($selected['type'] ?? '', $type->slug); ?>>
-              <?php echo esc_html($type->name); ?>
+          <?php foreach ($types as $slug => $label) : ?>
+            <option value="<?php echo esc_attr($slug); ?>" <?php selected($selected['type'] ?? '', $slug); ?>>
+              <?php echo esc_html($label); ?>
             </option>
           <?php endforeach; ?>
         </select>
