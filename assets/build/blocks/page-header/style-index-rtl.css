@@ -123,8 +123,12 @@
     font-size: 1.125rem;
   }
 }
-.wp-block-crownspeakers-page-header .page-header__title .is-highlight {
+.wp-block-crownspeakers-page-header .page-header__title .is-highlight,
+.wp-block-crownspeakers-page-header .page-header__title em {
   color: var(--color-secondary);
+}
+.wp-block-crownspeakers-page-header .page-header__title em {
+  font-style: normal;
 }
 .wp-block-crownspeakers-page-header .page-header__title {
   max-width: 46rem;

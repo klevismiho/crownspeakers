@@ -101,9 +101,15 @@
 		}
 	}
 
-	// Words marked with "Highlight (gold)" in the editor.
-	.page-header__title .is-highlight {
+	// Emphasised words in the title: "Highlight (gold)" or italic (Cmd+I) both show in the secondary
+	// color. Italic stays upright, matching the design's gold second line.
+	.page-header__title .is-highlight,
+	.page-header__title em {
 		color: var(--color-secondary);
+	}
+
+	.page-header__title em {
+		font-style: normal;
 	}
 
 	.page-header__title {
